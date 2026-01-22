@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -7,99 +6,91 @@
 <title>CANTECH Servis Formu</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 <header>CANTECH Gezici Bölge Merkez Servisi - Servis Formu</header>
 <div class="container">
 
-<!-- Servis No ve Tarih -->
+<!-- Servis Bilgileri -->
 <div class="card">
-<p>Servis No: <span id="serviceNo">606522</span></p>
-<p>Servis Kayıt Tarihi: <span id="serviceDate">21.01.2026 - 22:29</span></p>
-</div>
-
-<!-- Müşteri Bilgileri -->
-<div class="card">
-<h3>Müşteri Bilgileri</h3>
-<input type="text" id="customerName" placeholder="Ad Soyad">
+<h3>Servis Bilgileri</h3>
+<input type="text" id="serviceNo" placeholder="Servis No" value="606522">
+<input type="text" id="serviceDate" placeholder="Servis Tarihi" value="21.01.2026 - 22:29">
+<input type="text" id="customerName" placeholder="Müşteri Adı">
 <input type="text" id="customerPhone" placeholder="Telefon">
 <input type="text" id="customerAddress" placeholder="Adres">
-<input type="text" id="taxNo" placeholder="Vergi Daire / No">
-<input type="text" id="availableTime" placeholder="Müsait Olma Zamanı">
-<input type="text" id="operatorNote" placeholder="Operatör Notu">
 </div>
 
 <!-- Cihaz Bilgileri -->
 <div class="card">
 <h3>Cihaz Bilgileri</h3>
 <select id="deviceType" onchange="updateBrands()">
-  <option value="">Cihaz Türü Seç</option>
-  <option>Kombi</option>
-  <option>Klima</option>
-  <option>Televizyon</option>
-  <option>Buzdolabı</option>
-  <option>Çamaşır Makinesi</option>
-  <option>Bulaşık Makinesi</option>
+<option value="">Cihaz Türü Seç</option>
+<option>Kombi</option>
+<option>Klima</option>
+<option>Televizyon</option>
+<option>Buzdolabı</option>
+<option>Çamaşır Makinesi</option>
+<option>Bulaşık Makinesi</option>
 </select>
 <select id="brand"><option>Marka Seç</option></select>
 <input type="text" id="model" placeholder="Model">
 <input type="text" id="serial" placeholder="Seri No">
-<textarea id="issue" placeholder="Cihaz Arızası"></textarea>
+<textarea id="issue" placeholder="Arıza"></textarea>
 <input type="text" id="serviceStatus" placeholder="Servis Durumu">
 </div>
 
-<!-- Yapılacak İşlem / SERVİSTE YAPILAN İŞLEMLER -->
+<!-- Yapılacak İşlem -->
 <div class="card">
 <h3>Yapılacak İşlem</h3>
 <select id="taskSelect">
-  <option value="">Seçiniz</option>
-  <option>Atölyeye Alındı</option>
-  <option>Yerinde Bakım Yapıldı</option>
-  <option>Atölyeye Aldır (Nakliye Gönder)</option>
-  <option>Fiyatta Anlaşılmadı</option>
-  <option>Ürün Garantili Çıktı</option>
-  <option>Müşteriye Ulaşılamadı</option>
-  <option>Müşteri İptal Etti</option>
-  <option>Parçası Atölyeye Alındı</option>
-  <option>Haber Verecek</option>
-  <option>Farklı Teknisyen Yönlendirildi</option>
-  <option>Nakliyede</option>
-  <option>Servis Sonlandırıldı</option>
+<option value="">Seçiniz</option>
+<option>Atölyeye Alındı</option>
+<option>Yerinde Bakım Yapıldı</option>
+<option>Atölyeye Aldır (Nakliye Gönder)</option>
+<option>Fiyatta Anlaşılmadı</option>
+<option>Ürün Garantili Çıktı</option>
+<option>Müşteriye Ulaşılamadı</option>
+<option>Müşteri İptal Etti</option>
+<option>Parçası Atölyeye Alındı</option>
+<option>Haber Verecek</option>
+<option>Farklı Teknisyen Yönlendirildi</option>
+<option>Nakliyede</option>
+<option>Servis Sonlandırıldı</option>
 </select>
 <textarea id="taskDesc" placeholder="Yapılan İşlemler"></textarea>
 <input type="text" id="taskPrice" placeholder="Müşteriye Verilen Fiyat">
 <button onclick="addTask()">Ekle / Kaydet</button>
 
-<h4>SERVİSTE YAPILAN İŞLEMLER</h4>
+<h4>SERVİSTE YAPILAN SON 5 İŞLEM</h4>
 <div id="taskList"></div>
 </div>
 
-<!-- PARA HAREKETLERİ -->
+<!-- Para Hareketleri -->
 <div class="card">
 <h3>Para Hareketleri</h3>
 <input type="date" id="paymentDate">
 <input type="text" id="paymentAmount" placeholder="Tutar">
 <select id="paymentMethod">
-  <option value="">Ödeme Şekli</option>
-  <option>Nakit</option>
-  <option>EFT / Havale</option>
-  <option>Kredi Kartı</option>
+<option value="">Ödeme Şekli</option>
+<option>Nakit</option>
+<option>EFT / Havale</option>
+<option>Kredi Kartı</option>
 </select>
 <input type="text" id="paymentCollector" placeholder="Tahsil Eden">
 <button onclick="addPayment()">Ödeme Ekle</button>
-
 <div id="paymentList"></div>
 </div>
 
 <!-- İmzalar -->
 <div class="card">
 <h3>İmzalar</h3>
-<p>Tüketici İmzası:</p>
+<p>Müşteri İmzası (Sağ Alt):</p>
 <canvas id="customerSign" width="300" height="120"></canvas>
 <button onclick="clearSign('customerSign')">Temizle</button>
 
-<p>Teknisyen İmzası:</p>
+<p>Teknisyen İmzası (Sol Alt):</p>
 <canvas id="techSign" width="300" height="120"></canvas>
 <button onclick="clearSign('techSign')">Temizle</button>
 </div>
