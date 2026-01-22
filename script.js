@@ -1,8 +1,6 @@
-// Random servis numarası ve yetki no
 document.getElementById("serviceNo").innerText = Math.floor(100000 + Math.random() * 900000);
 document.getElementById("serviceAuthNo").innerText = Math.floor(10000 + Math.random()*90000) + "BM" + Math.floor(Math.random()*10);
 
-// Teknisyen formunu dolduracak fonksiyon
 function fillForm(data) {
     document.getElementById("customerName").innerText = data.customerName;
     document.getElementById("customerPhone").innerText = data.customerPhone;
@@ -34,7 +32,27 @@ function fillForm(data) {
     });
 }
 
-// Yazdırma
+function fillFromInputs() {
+    fillForm({
+        customerName: document.getElementById("inputCustomerName").value,
+        customerPhone: document.getElementById("inputCustomerPhone").value,
+        customerAddress: document.getElementById("inputCustomerAddress").value,
+        operatorNote: document.getElementById("inputOperatorNote").value,
+        deviceBrand: document.getElementById("inputDeviceBrand").value,
+        deviceType: document.getElementById("inputDeviceType").value,
+        deviceModel: document.getElementById("inputDeviceModel").value,
+        deviceSerial: document.getElementById("inputDeviceSerial").value,
+        deviceIssue: document.getElementById("inputDeviceIssue").value,
+        serviceStatus: document.getElementById("inputServiceStatus").value,
+        tasks:[
+            {date: new Date().toLocaleString(), action: document.getElementById("inputServiceStatus").value, desc:"Teknisyen tarafından girildi"}
+        ],
+        payments:[]
+    });
+
+    printForm();
+}
+
 function printForm(){
     const printContents = document.getElementById("printForm").innerHTML;
     const win = window.open('', '', 'height=900,width=900');
