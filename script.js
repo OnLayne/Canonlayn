@@ -30,8 +30,8 @@ function addTask(){
   const dt=`${now.toLocaleDateString()} - ${now.toLocaleTimeString()}`;
   div.innerHTML=`${dt} | ${task} | ${desc} | ${price}`;
   const list=document.getElementById("taskList");
-  list.insertBefore(div,list.firstChild); // en üstte görünür
-  if(list.children.length>5) list.removeChild(list.lastChild); // son 5 işlem
+  list.insertBefore(div,list.firstChild);
+  if(list.children.length>5) list.removeChild(list.lastChild);
   document.getElementById("taskSelect").value="";
   document.getElementById("taskDesc").value="";
   document.getElementById("taskPrice").value="";
@@ -69,17 +69,19 @@ function initSignature(canvasId){
 initSignature("customerSign"); initSignature("techSign");
 function clearSign(id){ const c=document.getElementById(id); c.getContext("2d").clearRect(0,0,c.width,c.height);}
 
-// PDF Oluşturma (8 tablo mantığı)
+// PDF Oluşturma – Profesyonel Kurumsal
 function generatePDF(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
   // Başlık
-  doc.setFontSize(16); doc.text("CANTECH Gezici Bölge Merkez Servisi",105,10,null,null,"center");
+  doc.setFontSize(18); doc.setTextColor(42,63,84); doc.text("CANTECH Gezici Bölge Merkez Servisi",105,12,null,null,"center");
 
-  // Tablo 1 ve 2 – Servis Bilgileri ve Cihaz Bilgileri yanyana
+  // Tablo 1 – Servis Bilgileri
   doc.autoTable({
     startY:20,
+    theme:'grid',
+    headStyles:{fillColor:[42,63,84], textColor:255},
     head:[["Servis No","Tarih","Müşteri","Telefon","Adres"]],
     body:[[document.getElementById("serviceNo").value,
            document.getElementById("serviceDate").value,
@@ -87,9 +89,13 @@ function generatePDF(){
            document.getElementById("customerPhone").value,
            document.getElementById("customerAddress").value]]
   });
+
+  // Tablo 2 – Cihaz Bilgileri yanyana
   doc.autoTable({
-    startY:doc.lastAutoTable.finalY - 20,
+    startY:doc.lastAutoTable.finalY-20,
     margin:{left:120},
+    theme:'grid',
+    headStyles:{fillColor:[100,149,237], textColor:255},
     head:[["Cihaz Türü","Marka","Model","Seri No","Arıza"]],
     body:[[document.getElementById("deviceType").value,
            document.getElementById("brand").value,
@@ -100,12 +106,12 @@ function generatePDF(){
 
   // Tablo 3 – Servis Durumu
   const status=document.getElementById("serviceStatus").value;
-  doc.setTextColor(status.includes("Bakım")?255:0,0,0); // kırmızı
-  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİS DURUMU"]], body:[[status]]});
-  doc.setTextColor(0,0,0); // reset
+  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİS DURUMU"]], body:[[status]],
+    headStyles:{fillColor:[192,57,43], textColor:255}, styles:{halign:'center', fontStyle:'bold'}});
 
-  // Tablo 4 – Son 5 işlem başlığı
-  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİSTE YAPILAN SON 5 İŞLEM"]], body:[[""]]});
+  // Tablo 4 – Son 5 İşlem Başlık
+  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİSTE YAPILAN SON 5 İŞLEM"]], body:[[""]],
+    headStyles:{fillColor:[42,63,84], textColor:255}});
 
   // Tablo 5 – Yapılan İşlemler Detayı
   const tasks=Array.from(document.getElementById("taskList").children).map(t=>t.innerText.split("|").map(x=>x.trim()));
@@ -113,7 +119,8 @@ function generatePDF(){
     doc.autoTable({
       startY:doc.lastAutoTable.finalY+2,
       head:[["Tarih-Saat","İşlem","Açıklama","Müşteriye Verilen Fiyat"]],
-      body:tasks
+      body:tasks,
+      alternateRowStyles:{fillColor:[242,242,242]}
     });
   }
 
@@ -123,19 +130,21 @@ function generatePDF(){
     doc.autoTable({
       startY:doc.lastAutoTable.finalY+2,
       head:[["Tarih","Tutar","Ödeme Şekli","Tahsil Eden"]],
-      body:pays
+      body:pays,
+      headStyles:{fillColor:[42,63,84], textColor:255},
+      alternateRowStyles:{fillColor:[242,242,242]}
     });
   }
 
   // Tablo 7 ve 8 – İmzalar
   const c1=document.getElementById("customerSign").toDataURL("image/png");
   const c2=document.getElementById("techSign").toDataURL("image/png");
-  doc.addImage(c1,"PNG",140,doc.lastAutoTable.finalY+10,50,30); // sağ alt müşteri
-  doc.addImage(c2,"PNG",10,doc.lastAutoTable.finalY+10,50,30);  // sol alt teknisyen
+  doc.addImage(c1,"PNG",140,doc.lastAutoTable.finalY+10,50,30);
+  doc.addImage(c2,"PNG",10,doc.lastAutoTable.finalY+10,50,30);
 
   // Yasal metin
   const legalText=`1- Yapılan işlemler 1 yıl garanti altındadır.\n2- Bu servis formu fatura yerine geçmez.\n3- Cayma bedeli iadesi yoktur.\n4- Takılan parçanın geri iadesi yoktur.\nServis istasyonlarının sorumlulukları...`;
-  doc.setFontSize(8); doc.text(legalText,10,doc.lastAutoTable.finalY+45);
+  doc.setFontSize(8); doc.setTextColor(50,50,50); doc.text(legalText,10,doc.lastAutoTable.finalY+45);
 
   doc.save("servis_formu.pdf");
 }
