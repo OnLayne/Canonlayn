@@ -5,7 +5,7 @@ document.getElementById("serviceAuthNo").innerText = Math.floor(10000 + Math.ran
 // Yazdırma fonksiyonu
 function printForm(){
   const printContents = document.getElementById("printForm").innerHTML;
-  const win = window.open('', '', 'height=800,width=800');
+  const win = window.open('', '', 'height=900,width=900');
   win.document.write('<html><head><title>Yazdır</title>');
   win.document.write('<link rel="stylesheet" href="style.css">');
   win.document.write('</head><body>');
