@@ -8,8 +8,34 @@
 </head>
 <body>
 
-<div class="form-container" id="printForm">
+<div class="fill-form">
+  <h3>Teknisyen Formu Doldur</h3>
+  <label>Ad Soyad (Müşteri): <input type="text" id="inputCustomerName"></label>
+  <label>Telefon: <input type="text" id="inputCustomerPhone"></label>
+  <label>Adres: <input type="text" id="inputCustomerAddress"></label>
+  <label>Operatör Notu: <input type="text" id="inputOperatorNote"></label>
 
+  <label>Cihaz Markası: <input type="text" id="inputDeviceBrand"></label>
+  <label>Cihaz Türü: <input type="text" id="inputDeviceType"></label>
+  <label>Cihaz Modeli: <input type="text" id="inputDeviceModel"></label>
+  <label>Cihaz Seri No: <input type="text" id="inputDeviceSerial"></label>
+  <label>Cihaz Arızası: <input type="text" id="inputDeviceIssue"></label>
+
+  <label>Servis Durumu:
+    <select id="inputServiceStatus">
+      <option>Yerinde Bakım Yapıldı</option>
+      <option>Atölyeye Alındı</option>
+      <option>Fiyatta Anlaşılamadı</option>
+      <option>Ürün Garantili Çıktı</option>
+      <option>Müşteriye Ulaşılamadı</option>
+      <option>Servis Sonlandırıldı</option>
+    </select>
+  </label>
+
+  <button onclick="fillFromInputs()">Formu Bitir ve Yazdır</button>
+</div>
+
+<div class="form-container" id="printForm">
   <h1 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h1>
   <h2 class="center">- TEKNİK SERVİS FORMU -</h2>
 
@@ -85,7 +111,6 @@
       <div class="signature-box"></div>
     </div>
   </div>
-
 </div>
 
 <div class="print-button">
