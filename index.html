@@ -3,99 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CANTECH Servis Formu</title>
+<title>Teknik Servis Formu</title>
 <link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-<header>CANTECH Gezici Bölge Merkez Servisi</header>
-<div class="container">
 
-<!-- Servis Bilgileri -->
-<div class="card">
-<h3>Servis Bilgileri</h3>
-<input type="text" id="serviceNo" placeholder="Servis No" value="606522">
-<input type="text" id="serviceDate" placeholder="Servis Tarihi" value="21.01.2026 - 22:29">
-<input type="text" id="customerName" placeholder="Müşteri Adı">
-<input type="text" id="customerPhone" placeholder="Telefon">
-<input type="text" id="customerAddress" placeholder="Adres">
+<div class="form-container" id="printForm">
+
+  <!-- 1. Başlık -->
+  <h1 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h1>
+
+  <!-- 2. Alt Başlık -->
+  <h2 class="center">- TEKNİK SERVİS FORMU -</h2>
+
+  <!-- 3. Sol Üst Servis No -->
+  <div class="top-info">
+    <div class="left">
+      Servis No : <span id="serviceNo"></span>
+    </div>
+    <!-- 4. Sağ Üst Yetki No -->
+    <div class="right">
+      Servis Yetki No : <span id="serviceAuthNo"></span>
+    </div>
+  </div>
+
+  <!-- 5 & 6. Müşteri ve Cihaz Bilgileri -->
+  <div class="info-tables">
+    <table class="left-table">
+      <caption>MÜŞTERİ BİLGİLERİ</caption>
+      <tr><td>Ad</td><td><span id="customerName">Mahmut Saktaş</span></td></tr>
+      <tr><td>Telefon</td><td><span id="customerPhone">0543 499 6018</span></td></tr>
+      <tr><td>Adres</td><td><span id="customerAddress">Kadınlar Denizi Mahallesi Ferhat Yapı Kooperatifi Damla Apt Kat 2 Kuşadası/Aydın</span></td></tr>
+      <tr><td>Operatör Notu</td><td><span id="operatorNote">SU 800 TL BUGÜN</span></td></tr>
+    </table>
+
+    <table class="right-table">
+      <caption>CİHAZ BİLGİSİ</caption>
+      <tr><td>Cihaz Markası</td><td><span id="deviceBrand">Bosch</span></td></tr>
+      <tr><td>Cihaz Türü</td><td><span id="deviceType">Kombi</span></td></tr>
+      <tr><td>Cihaz Modeli</td><td><span id="deviceModel">Buderus</span></td></tr>
+      <tr><td>Cihaz Seri No</td><td><span id="deviceSerial"></span></td></tr>
+      <tr><td>Cihaz Arızası</td><td><span id="deviceIssue">Isıtmıyor</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 7. Servis Durumu -->
+  <div class="service-status">
+    <strong>SERVİS DURUMU : </strong> <span id="serviceStatus">Yerinde Bakım Yapıldı</span>
+  </div>
+
+  <!-- 8. Serviste Yapılan İşlemler -->
+  <table class="full-table">
+    <caption>SERVİSTE YAPILAN İŞLEMLER</caption>
+    <thead>
+      <tr>
+        <th>TARİH</th>
+        <th>İŞLEM ADI</th>
+        <th>AÇIKLAMA</th>
+      </tr>
+    </thead>
+    <tbody id="taskTableBody">
+      <tr>
+        <td>21.01.2026 - 22:42</td>
+        <td>Yerinde Bakım Yapıldı</td>
+        <td>Cihaza yapılan kontrollerde ana kart revize edildi, parçalar değiştirildi...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 9. Para Hareketleri -->
+  <table class="full-table">
+    <caption>PARA HAREKETLERİ</caption>
+    <thead>
+      <tr>
+        <th>TARİH</th>
+        <th>TAHSİL EDEN</th>
+        <th>ÖDEME ŞEKLİ</th>
+        <th>ÖDEME DURUMU</th>
+        <th>TUTAR</th>
+      </tr>
+    </thead>
+    <tbody id="paymentTableBody">
+      <tr>
+        <td>22.01.2026</td>
+        <td>MERKEZ SERVİS FABRİKA (Can Karaca)</td>
+        <td>Nakit</td>
+        <td>Alındı</td>
+        <td>4.000,00 TL</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- İmzalar -->
+  <div class="signatures">
+    <div class="left-sign">
+      <p>Müşteri İmza</p>
+      <div class="signature-box"></div>
+    </div>
+    <div class="right-sign">
+      <p>Teknisyen İmza</p>
+      <div class="signature-box"></div>
+    </div>
+  </div>
+
 </div>
 
-<!-- Cihaz Bilgileri -->
-<div class="card">
-<h3>Cihaz Bilgileri</h3>
-<select id="deviceType" onchange="updateBrands()">
-<option value="">Cihaz Türü Seç</option>
-<option>Kombi</option>
-<option>Klima</option>
-<option>Televizyon</option>
-<option>Buzdolabı</option>
-<option>Çamaşır Makinesi</option>
-<option>Bulaşık Makinesi</option>
-</select>
-<select id="brand"><option>Marka Seç</option></select>
-<input type="text" id="model" placeholder="Model">
-<input type="text" id="serial" placeholder="Seri No">
-<textarea id="issue" placeholder="Arıza"></textarea>
-<input type="text" id="serviceStatus" placeholder="Servis Durumu">
+<!-- Yazdır Butonu -->
+<div class="print-button">
+  <button onclick="printForm()">Formu Yazdır (A4)</button>
 </div>
-
-<!-- Yapılacak İşlem -->
-<div class="card">
-<h3>Yapılacak İşlem</h3>
-<select id="taskSelect">
-<option value="">Seçiniz</option>
-<option>Atölyeye Alındı</option>
-<option>Yerinde Bakım Yapıldı</option>
-<option>Atölyeye Aldır (Nakliye Gönder)</option>
-<option>Fiyatta Anlaşılmadı</option>
-<option>Ürün Garantili Çıktı</option>
-<option>Müşteriye Ulaşılamadı</option>
-<option>Müşteri İptal Etti</option>
-<option>Parçası Atölyeye Alındı</option>
-<option>Haber Verecek</option>
-<option>Farklı Teknisyen Yönlendirildi</option>
-<option>Nakliyede</option>
-<option>Servis Sonlandırıldı</option>
-</select>
-<textarea id="taskDesc" placeholder="Yapılan İşlemler"></textarea>
-<input type="text" id="taskPrice" placeholder="Müşteriye Verilen Fiyat">
-<button onclick="addTask()">Ekle / Kaydet</button>
-
-<h4>SERVİSTE YAPILAN SON 5 İŞLEM</h4>
-<div id="taskList"></div>
-</div>
-
-<!-- Para Hareketleri -->
-<div class="card">
-<h3>Para Hareketleri</h3>
-<input type="date" id="paymentDate">
-<input type="text" id="paymentAmount" placeholder="Tutar">
-<select id="paymentMethod">
-<option value="">Ödeme Şekli</option>
-<option>Nakit</option>
-<option>EFT / Havale</option>
-<option>Kredi Kartı</option>
-</select>
-<input type="text" id="paymentCollector" placeholder="Tahsil Eden">
-<button onclick="addPayment()">Ödeme Ekle</button>
-<div id="paymentList"></div>
-</div>
-
-<!-- İmzalar -->
-<div class="card">
-<h3>İmzalar</h3>
-<p>Müşteri İmzası (Sağ Alt):</p>
-<canvas id="customerSign" width="300" height="120"></canvas>
-<button onclick="clearSign('customerSign')">Temizle</button>
-
-<p>Teknisyen İmzası (Sol Alt):</p>
-<canvas id="techSign" width="300" height="120"></canvas>
-<button onclick="clearSign('techSign')">Temizle</button>
-</div>
-
-<button onclick="generatePDF()">PDF Oluştur</button>
 
 <script src="script.js"></script>
 </body>
