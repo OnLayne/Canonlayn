@@ -1,4 +1,9 @@
 body { font-family: 'Helvetica', Arial, sans-serif; background:#f5f5f5; padding:0; margin:0;}
+.fill-form { max-width:800px; margin:auto; background:#eef2f7; padding:15px; box-shadow:0 0 5px rgba(0,0,0,0.1); margin-bottom:20px; }
+.fill-form label { display:block; margin-bottom:5px; font-weight:bold; }
+.fill-form input, .fill-form select { width:100%; padding:5px; margin-bottom:10px; font-size:14px; }
+.fill-form button { background:#2a3f54; color:#fff; border:none; padding:10px 20px; cursor:pointer; border-radius:5px; }
+
 .form-container { max-width:800px; margin:auto; background:#fff; padding:20px; box-shadow:0 0 8px rgba(0,0,0,0.1);}
 .center { text-align:center; font-weight:bold; color:#2a3f54; }
 .top-info { display:flex; justify-content:space-between; margin-top:10px; margin-bottom:20px; }
