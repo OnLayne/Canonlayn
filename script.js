@@ -1,4 +1,3 @@
-
 // Cihaz Türü -> Marka
 const deviceBrands = {
   Kombi:["Vaillant","Demirdöküm","Baymak","Bosch","Buderus","E.C.A","Ferroli","Ariston"],
@@ -27,10 +26,12 @@ function addTask(){
   const price=document.getElementById("taskPrice").value;
   if(!task) return alert("İşlem seçiniz!");
   const div=document.createElement("div");
-  div.innerHTML=`<strong>GEZİCİ BÖLGE MERKEZ :</strong> ${task}<br>
-                 <strong>Yapılan İşlemler :</strong> ${desc}<br>
-                 <strong>Müşteriye Verilen Fiyat :</strong> ${price}`;
-  document.getElementById("taskList").appendChild(div);
+  const now=new Date();
+  const dt=`${now.toLocaleDateString()} - ${now.toLocaleTimeString()}`;
+  div.innerHTML=`${dt} | ${task} | ${desc} | ${price}`;
+  const list=document.getElementById("taskList");
+  list.insertBefore(div,list.firstChild); // en üstte görünür
+  if(list.children.length>5) list.removeChild(list.lastChild); // son 5 işlem
   document.getElementById("taskSelect").value="";
   document.getElementById("taskDesc").value="";
   document.getElementById("taskPrice").value="";
@@ -42,9 +43,9 @@ function addPayment(){
   const amount=document.getElementById("paymentAmount").value;
   const method=document.getElementById("paymentMethod").value;
   const collector=document.getElementById("paymentCollector").value;
-  if(!date || !amount || !method || !collector) return alert("Tüm alanları doldurun!");
+  if(!date||!amount||!method||!collector) return alert("Tüm alanları doldurun!");
   const div=document.createElement("div");
-  div.innerHTML=`${date} - ${amount} TL - ${method} - ${collector}`;
+  div.innerText=`${date} | ${amount} TL | ${method} | ${collector}`;
   document.getElementById("paymentList").appendChild(div);
   document.getElementById("paymentDate").value="";
   document.getElementById("paymentAmount").value="";
@@ -66,48 +67,75 @@ function initSignature(canvasId){
   });
 }
 initSignature("customerSign"); initSignature("techSign");
-function clearSign(id){
-  const c=document.getElementById(id);
-  c.getContext("2d").clearRect(0,0,c.width,c.height);
-}
+function clearSign(id){ const c=document.getElementById(id); c.getContext("2d").clearRect(0,0,c.width,c.height);}
 
-// PDF
-async function generatePDF(){
+// PDF Oluşturma (8 tablo mantığı)
+function generatePDF(){
   const { jsPDF } = window.jspdf;
-  const pdf=new jsPDF();
-  let y=10;
-  pdf.setFontSize(16); pdf.text("CANTECH Gezici Bölge Merkez Servisi",105,y,null,null,"center"); y+=10;
-  
-  function addText(label,id){pdf.setFontSize(12); pdf.text(`${label}: ${document.getElementById(id).value}`,10,y); y+=7;}
-  addText("Servis No","serviceNo"); addText("Servis Tarihi","serviceDate");
-  addText("Müşteri Ad Soyad","customerName"); addText("Telefon","customerPhone");
-  addText("Adres","customerAddress"); addText("Vergi No","taxNo");
-  addText("Müsait Zaman","availableTime"); addText("Operatör Notu","operatorNote");
-  addText("Cihaz Türü","deviceType"); addText("Marka","brand"); addText("Model","model");
-  addText("Seri No","serial"); addText("Arıza","issue"); addText("Servis Durumu","serviceStatus");
+  const doc = new jsPDF();
 
-  // Yapılan işlemler
-  const tasks=document.getElementById("taskList").children;
-  if(tasks.length>0){pdf.setFontSize(12); pdf.text("SERVİSTE YAPILAN İŞLEMLER:",10,y); y+=7;}
-  for(let t of tasks){pdf.text(t.innerText,10,y); y+=10;}
+  // Başlık
+  doc.setFontSize(16); doc.text("CANTECH Gezici Bölge Merkez Servisi",105,10,null,null,"center");
 
-  // Para Hareketleri
-  const pays=document.getElementById("paymentList").children;
-  if(pays.length>0){pdf.setFontSize(12); pdf.text("PARA HAREKETLERİ:",10,y); y+=7;}
-  for(let p of pays){pdf.text(p.innerText,10,y); y+=7;}
+  // Tablo 1 ve 2 – Servis Bilgileri ve Cihaz Bilgileri yanyana
+  doc.autoTable({
+    startY:20,
+    head:[["Servis No","Tarih","Müşteri","Telefon","Adres"]],
+    body:[[document.getElementById("serviceNo").value,
+           document.getElementById("serviceDate").value,
+           document.getElementById("customerName").value,
+           document.getElementById("customerPhone").value,
+           document.getElementById("customerAddress").value]]
+  });
+  doc.autoTable({
+    startY:doc.lastAutoTable.finalY - 20,
+    margin:{left:120},
+    head:[["Cihaz Türü","Marka","Model","Seri No","Arıza"]],
+    body:[[document.getElementById("deviceType").value,
+           document.getElementById("brand").value,
+           document.getElementById("model").value,
+           document.getElementById("serial").value,
+           document.getElementById("issue").value]]
+  });
 
-  // İmzalar
+  // Tablo 3 – Servis Durumu
+  const status=document.getElementById("serviceStatus").value;
+  doc.setTextColor(status.includes("Bakım")?255:0,0,0); // kırmızı
+  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİS DURUMU"]], body:[[status]]});
+  doc.setTextColor(0,0,0); // reset
+
+  // Tablo 4 – Son 5 işlem başlığı
+  doc.autoTable({startY:doc.lastAutoTable.finalY+5, head:[["SERVİSTE YAPILAN SON 5 İŞLEM"]], body:[[""]]});
+
+  // Tablo 5 – Yapılan İşlemler Detayı
+  const tasks=Array.from(document.getElementById("taskList").children).map(t=>t.innerText.split("|").map(x=>x.trim()));
+  if(tasks.length>0){
+    doc.autoTable({
+      startY:doc.lastAutoTable.finalY+2,
+      head:[["Tarih-Saat","İşlem","Açıklama","Müşteriye Verilen Fiyat"]],
+      body:tasks
+    });
+  }
+
+  // Tablo 6 – Para Hareketleri
+  const pays=Array.from(document.getElementById("paymentList").children).map(p=>p.innerText.split("|").map(x=>x.trim()));
+  if(pays.length>0){
+    doc.autoTable({
+      startY:doc.lastAutoTable.finalY+2,
+      head:[["Tarih","Tutar","Ödeme Şekli","Tahsil Eden"]],
+      body:pays
+    });
+  }
+
+  // Tablo 7 ve 8 – İmzalar
   const c1=document.getElementById("customerSign").toDataURL("image/png");
   const c2=document.getElementById("techSign").toDataURL("image/png");
-  pdf.addImage(c1,"PNG",10,y,80,40); pdf.addImage(c2,"PNG",110,y,80,40); y+=45;
+  doc.addImage(c1,"PNG",140,doc.lastAutoTable.finalY+10,50,30); // sağ alt müşteri
+  doc.addImage(c2,"PNG",10,doc.lastAutoTable.finalY+10,50,30);  // sol alt teknisyen
 
   // Yasal metin
-  const legalText=`1- Yapılan işlemler 1 yıl garanti altındadır.
-2- Bu servis formu fatura yerine geçmez.
-3- Cayma bedeli iadesi yoktur.
-4- Takılan parçanın geri iadesi yoktur.
-(5) Servis istasyonlarının sorumlulukları...`;
-  pdf.setFontSize(8); pdf.text(legalText,10,y);
+  const legalText=`1- Yapılan işlemler 1 yıl garanti altındadır.\n2- Bu servis formu fatura yerine geçmez.\n3- Cayma bedeli iadesi yoktur.\n4- Takılan parçanın geri iadesi yoktur.\nServis istasyonlarının sorumlulukları...`;
+  doc.setFontSize(8); doc.text(legalText,10,doc.lastAutoTable.finalY+45);
 
-  pdf.save("servis_formu.pdf");
+  doc.save("servis_formu.pdf");
 }
