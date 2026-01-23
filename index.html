@@ -8,61 +8,106 @@
 </head>
 <body>
 
-<div class="fill-form">
-  <h3>Teknisyen Formu Doldur</h3>
+<div class="form-container">
 
-  <label>Ad Soyad (Müşteri): <input type="text" id="inputCustomerName"></label>
-  <label>Telefon: <input type="text" id="inputCustomerPhone"></label>
-  <label>Adres: <input type="text" id="inputCustomerAddress"></label>
-  <label>Operatör Notu: <input type="text" id="inputOperatorNote"></label>
+  <h1 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h1>
+  <h2 class="center">- TEKNİK SERVİS FORMU -</h2>
 
-  <label>Cihaz Türü:
-    <select id="inputDeviceType" onchange="updateDeviceBrands()">
-      <option value="">Seçiniz</option>
-      <option>Kombi</option>
-      <option>Klima</option>
-      <option>Televizyon</option>
-      <option>Buzdolabı</option>
-      <option>Çamaşır Makinesi</option>
-      <option>Bulaşık Makinesi</option>
-    </select>
-  </label>
-  <label>Cihaz Markası:
-    <select id="inputDeviceBrand"><option>Önce Tür Seçiniz</option></select>
-  </label>
+  <div class="top-info">
+    <div class="left">Servis No : <span id="serviceNo"></span></div>
+    <div class="right">Servis Yetki No : <span id="serviceAuthNo"></span></div>
+  </div>
 
-  <label>Cihaz Modeli: <input type="text" id="inputDeviceModel"></label>
-  <label>Cihaz Seri No: <input type="text" id="inputDeviceSerial"></label>
-  <label>Cihaz Arızası: <input type="text" id="inputDeviceIssue"></label>
+  <div class="info-tables">
+    <!-- Müşteri Bilgileri -->
+    <table class="left-table">
+      <caption>MÜŞTERİ BİLGİLERİ</caption>
+      <tr><td>Ad</td><td><input id="customerName" value="Mahmut Saktaş"></td></tr>
+      <tr><td>Telefon</td><td><input id="customerPhone" value="0543 499 6018"></td></tr>
+      <tr><td>Adres</td><td><input id="customerAddress" value="Kadınlar Denizi Mahallesi Ferhat Yapı Kooperatifi Damla Apt Kat 2 Kuşadası/Aydın"></td></tr>
+      <tr><td>Operatör Notu</td><td><input id="operatorNote" value="SU 800 TL BUGÜN"></td></tr>
+    </table>
 
-  <label>Yapılacak İşlem:
-    <select id="inputTaskAction">
-      <option>Seçiniz</option>
-      <option>Atölyeye Alındı</option>
+    <!-- Cihaz Bilgileri -->
+    <table class="right-table">
+      <caption>CİHAZ BİLGİSİ</caption>
+      <tr><td>Cihaz Markası</td><td><input id="deviceBrand" value="Bosch"></td></tr>
+      <tr><td>Cihaz Türü</td><td><input id="deviceType" value="Kombi"></td></tr>
+      <tr><td>Cihaz Modeli</td><td><input id="deviceModel" value="Buderus"></td></tr>
+      <tr><td>Cihaz Seri No</td><td><input id="deviceSerial" value="123456789"></td></tr>
+      <tr><td>Cihaz Arızası</td><td><input id="deviceIssue" value="Isıtmıyor"></td></tr>
+    </table>
+  </div>
+
+  <!-- Servis Durumu -->
+  <div class="service-status">
+    <label>SERVİS DURUMU : </label>
+    <select id="serviceStatus">
       <option>Yerinde Bakım Yapıldı</option>
-      <option>Atölyeye Aldır (Nakliye Gönder)</option>
-      <option>Fiyatta Anlaşılamadı</option>
-      <option>Ürün Garantili Çıktı</option>
-      <option>Müşteriye Ulaşılamadı</option>
-      <option>Müşteri İptal Etti</option>
-      <option>Parçası Atölyeye Alındı</option>
-      <option>Haber Verecek</option>
-      <option>Farklı Teknisyen</option>
-      <option>Yönlendirildi</option>
-      <option>Nakliyede</option>
+      <option>Atölyeye Alındı</option>
       <option>Servis Sonlandırıldı</option>
     </select>
-  </label>
+  </div>
 
-  <label>Yapılan İşlemler:
-    <textarea id="inputTaskDesc" placeholder="Örn: Üçyol step motoru 1200384 kodlu değiştirildi..."></textarea>
-  </label>
+  <!-- Yapılan İşlemler -->
+  <div>
+    <h3>Serviste Yapılan İşlemler</h3>
+    <table class="full-table">
+      <thead>
+        <tr><th>TARİH</th><th>İŞLEM ADI</th><th>AÇIKLAMA</th></tr>
+      </thead>
+      <tbody id="taskTableBody">
+        <tr>
+          <td><input type="date" value="2026-01-21"></td>
+          <td><input value="Yerinde Bakım Yapıldı"></td>
+          <td><input value="Cihaza yapılan kontrollerde ana kart revize edildi, parçalar değiştirildi..."></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
+  </div>
 
-  <label>Müşteriye Verilen Fiyat (TL):
-    <input type="number" id="inputTaskPrice" value="0">
-  </label>
+  <!-- Para Hareketleri -->
+  <div>
+    <h3>Para Hareketleri</h3>
+    <table class="full-table">
+      <thead><tr><th>TARİH</th><th>TAHSİL EDEN</th><th>ÖDEME ŞEKLİ</th><th>ÖDEME DURUMU</th><th>TUTAR</th></tr></thead>
+      <tbody id="paymentTableBody">
+        <tr>
+          <td><input type="date" value="2026-01-22"></td>
+          <td><input value="MERKEZ SERVİS FABRİKA (Can Karaca)"></td>
+          <td><input value="Nakit"></td>
+          <td><input value="Alındı"></td>
+          <td><input value="4.000,00 TL"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
+  </div>
 
-  <button onclick="fillFromInputs()">Formu Bitir ve Yazdır</button>
+  <!-- İmzalar ve Müşteri Bilgilendirme -->
+  <div class="signatures">
+    <div class="left-sign">
+      <table class="info-table">
+        <caption>Müşteri Bilgilendirme</caption>
+        <tr><td>1- YAPILAN İŞLEMLER 1 YIL GARANTİ ALTINDADIR.</td></tr>
+        <tr><td>2- BU SERVİS FORMU FATURA YERİNE GEÇMEZ.</td></tr>
+        <tr><td>3- CAYMA BEDELİ İADESİ YOKTUR.</td></tr>
+        <tr><td>4- TAKILAN PARÇANIN GERİ İADESİ YOKTUR.</td></tr>
+      </table>
+      <p>Müşteri İmza</p>
+      <div class="signature-box"></div>
+    </div>
+    <div class="right-sign">
+      <p>Teknisyen İmza</p>
+      <div class="signature-box"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="print-button">
+  <button onclick="printForm()">Formu Yazdır (A4)</button>
 </div>
 
 <script src="script.js"></script>
