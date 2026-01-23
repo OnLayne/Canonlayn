@@ -39,7 +39,6 @@
     </table>
   </div>
 
-  <!-- Servis Durumu -->
   <div class="service-status">
     <label>SERVİS DURUMU : </label>
     <select id="serviceStatus">
@@ -49,18 +48,24 @@
     </select>
   </div>
 
-  <!-- Yapılan İşlemler -->
+  <!-- Serviste Yapılan İşlemler -->
   <div>
     <h3>Serviste Yapılan İşlemler</h3>
     <table class="full-table">
       <thead>
-        <tr><th>TARİH</th><th>İŞLEM ADI</th><th>AÇIKLAMA</th></tr>
+        <tr>
+          <th>TARİH</th>
+          <th>İŞLEM ADI</th>
+          <th>AÇIKLAMA</th>
+          <th>Müşteriye Verilen Fiyat</th>
+        </tr>
       </thead>
       <tbody id="taskTableBody">
         <tr>
           <td><input type="date" value="2026-01-21"></td>
           <td><input value="Yerinde Bakım Yapıldı"></td>
           <td><input value="Cihaza yapılan kontrollerde ana kart revize edildi, parçalar değiştirildi..."></td>
+          <td><input value="4.000 TL"></td>
         </tr>
       </tbody>
     </table>
@@ -96,11 +101,13 @@
         <tr><td>4- TAKILAN PARÇANIN GERİ İADESİ YOKTUR.</td></tr>
       </table>
       <p>Müşteri İmza</p>
-      <div class="signature-box"></div>
+      <canvas id="customerSign" class="signature-box"></canvas>
+      <button onclick="clearSign('customerSign')">Temizle</button>
     </div>
     <div class="right-sign">
       <p>Teknisyen İmza</p>
-      <div class="signature-box"></div>
+      <canvas id="techSign" class="signature-box"></canvas>
+      <button onclick="clearSign('techSign')">Temizle</button>
     </div>
   </div>
 
