@@ -1,25 +1,33 @@
-body { font-family: 'Helvetica', Arial, sans-serif; background:#f5f5f5; padding:0; margin:0;}
-.fill-form { max-width:800px; margin:auto; background:#eef2f7; padding:15px; box-shadow:0 0 5px rgba(0,0,0,0.1); margin-bottom:20px; }
-.fill-form label { display:block; margin-bottom:5px; font-weight:bold; }
-.fill-form input, .fill-form select { width:100%; padding:5px; margin-bottom:10px; font-size:14px; }
-.fill-form button { background:#2a3f54; color:#fff; border:none; padding:10px 20px; cursor:pointer; border-radius:5px; }
-
+body { font-family:'Helvetica', Arial, sans-serif; background:#f5f5f5; margin:0; padding:0;}
 .form-container { max-width:800px; margin:auto; background:#fff; padding:20px; box-shadow:0 0 8px rgba(0,0,0,0.1);}
 .center { text-align:center; font-weight:bold; color:#2a3f54; }
+
+.logo-container { text-align:center; margin-bottom:10px; }
+.logo { max-height:60px; width:auto; }
+
 .top-info { display:flex; justify-content:space-between; margin-top:10px; margin-bottom:20px; }
 .left, .right { font-weight:bold; }
+
 .info-tables { display:flex; justify-content:space-between; margin-bottom:20px; }
 .left-table, .right-table, .full-table { width:48%; border-collapse:collapse; }
 .left-table td, .right-table td, .full-table th, .full-table td { border:1px solid #ccc; padding:8px; font-size:13px; }
 .left-table caption, .right-table caption, .full-table caption { font-weight:bold; margin-bottom:5px; text-align:left; }
+
 .full-table { width:100%; margin-bottom:20px; }
 .full-table th { background:#2a3f54; color:#fff; font-weight:bold; }
+
 .service-status { font-weight:bold; margin-bottom:15px; }
 #serviceStatus { color:#c0392b; }
+
 .signatures { display:flex; justify-content:space-between; margin-top:50px; }
-.signature-box { width:250px; height:80px; border:1px solid #000; }
-.info-table { border-collapse:collapse; width:100%; margin-bottom:10px; }
-.info-table td { border:1px solid #ccc; padding:5px; font-size:12px; background:#f9f9f9; }
-.info-table caption { font-weight:bold; margin-bottom:5px; text-align:left; }
+.signature-box { width:250px; height:80px; border:1px solid #000; touch-action:none; }
+
+.customer-info { margin-top:30px; }
+.customer-info .info-table td {
+    font-size:13px; background:#eef2f5; color:#2a3f54; padding:8px; border:1px solid #ccc;
+}
+.customer-info .info-table caption { font-weight:bold; font-size:14px; margin-bottom:5px; text-align:left; color:#2a3f54; }
+
 .print-button { text-align:center; margin:20px 0; }
 button { padding:10px 20px; font-size:16px; background:#2a3f54; color:#fff; border:none; border-radius:5px; cursor:pointer;}
+input { width:100%; border:none; font-size:13px; }
