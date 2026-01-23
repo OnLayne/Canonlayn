@@ -1,82 +1,47 @@
-// Random Servis No & Yetki No
-document.getElementById("serviceNo").innerText = Math.floor(100000 + Math.random() * 900000);
-document.getElementById("serviceAuthNo").innerText = Math.floor(10000 + Math.random()*90000) + "BM" + Math.floor(Math.random()*10);
+function initSignature(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
 
-// İşlem ve ödeme ekleme
-function addTaskRow(){
-  const tbody = document.getElementById("taskTableBody");
-  const tr = document.createElement("tr");
-  tr.innerHTML = `<td><input type="date"></td><td><input></td><td><input></td><td><input></td>`;
-  tbody.appendChild(tr);
+    const getPos = (e) => {
+        if (e.touches) { // iOS/Android dokunmatik
+            return { x: e.touches[0].clientX - canvas.getBoundingClientRect().left, 
+                     y: e.touches[0].clientY - canvas.getBoundingClientRect().top };
+        } else { // Masaüstü mouse
+            return { x: e.offsetX, y: e.offsetY };
+        }
+    }
+
+    const start = (e) => { drawing = true; const pos = getPos(e); ctx.moveTo(pos.x, pos.y); }
+    const draw = (e) => {
+        if (!drawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+    const end = () => { drawing = false; ctx.beginPath(); }
+
+    // Mouse events
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+
+    // Touch events
+    canvas.addEventListener('touchstart', start);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', end);
 }
 
-function addPaymentRow(){
-  const tbody = document.getElementById("paymentTableBody");
-  const tr = document.createElement("tr");
-  tr.innerHTML = `<td><input type="date"></td><td><input></td><td><input></td><td><input></td><td><input></td>`;
-  tbody.appendChild(tr);
+function clearSign(canvasId){
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// İmzayı temizle
-function clearSign(id){
-  const canvas = document.getElementById(id);
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-}
-
-// İmza çizimi (iOS uyumlu)
-function enableSign(id){
-  const canvas = document.getElementById(id);
-  const ctx = canvas.getContext('2d');
-  let drawing=false;
-
-  canvas.addEventListener('touchstart', e => { drawing=true; draw(e); });
-  canvas.addEventListener('touchmove', draw);
-  canvas.addEventListener('touchend', e => drawing=false);
-
-  function draw(e){
-    if(!drawing) return;
-    e.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches[0];
-    ctx.lineWidth=2;
-    ctx.lineCap='round';
-    ctx.strokeStyle='black';
-    ctx.lineTo(touch.clientX-rect.left, touch.clientY-rect.top);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(touch.clientX-rect.left, touch.clientY-rect.top);
-  }
-}
-
-enableSign('customerSign');
-enableSign('techSign');
-
-// Yazdırma
-function printForm(){
-  const container = document.querySelector('.form-container').cloneNode(true);
-
-  // Canvas'ları resim olarak ekle
-  const customerCanvas = document.getElementById('customerSign');
-  const techCanvas = document.getElementById('techSign');
-
-  const custImg = document.createElement('img');
-  custImg.src = customerCanvas.toDataURL();
-  custImg.style.width='250px';
-  container.querySelector('#customerSign').replaceWith(custImg);
-
-  const techImg = document.createElement('img');
-  techImg.src = techCanvas.toDataURL();
-  techImg.style.width='250px';
-  container.querySelector('#techSign').replaceWith(techImg);
-
-  const win = window.open('', '', 'height=900,width=900');
-  win.document.write('<html><head><title>Servis Formu</title>');
-  win.document.write('<link rel="stylesheet" href="style.css">');
-  win.document.write('</head><body>');
-  win.document.write(container.outerHTML);
-  win.document.write('</body></html>');
-  win.document.close();
-  win.focus();
-  win.print();
-}
+// Başlangıçta imza canvaslarını aktif et
+initSignature('customerSign');
+initSignature('techSign');
