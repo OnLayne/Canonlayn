@@ -1,82 +1,33 @@
-// Random Servis No & Yetki No
-document.getElementById("serviceNo").innerText = Math.floor(100000 + Math.random() * 900000);
-document.getElementById("serviceAuthNo").innerText = Math.floor(10000 + Math.random()*90000) + "BM" + Math.floor(Math.random()*10);
+body { font-family:'Helvetica', Arial, sans-serif; background:#f5f5f5; margin:0; padding:0;}
+.form-container { max-width:800px; margin:auto; background:#fff; padding:20px; box-shadow:0 0 8px rgba(0,0,0,0.1);}
+.center { text-align:center; font-weight:bold; color:#2a3f54; }
 
-// İşlem ve ödeme ekleme
-function addTaskRow(){
-  const tbody = document.getElementById("taskTableBody");
-  const tr = document.createElement("tr");
-  tr.innerHTML = `<td><input type="date"></td><td><input></td><td><input></td><td><input></td>`;
-  tbody.appendChild(tr);
+.logo-container { text-align:center; margin-bottom:10px; }
+.logo { max-height:60px; width:auto; }
+
+.top-info { display:flex; justify-content:space-between; margin-top:10px; margin-bottom:20px; }
+.left, .right { font-weight:bold; }
+
+.info-tables { display:flex; justify-content:space-between; margin-bottom:20px; }
+.left-table, .right-table, .full-table { width:48%; border-collapse:collapse; }
+.left-table td, .right-table td, .full-table th, .full-table td { border:1px solid #ccc; padding:8px; font-size:13px; }
+.left-table caption, .right-table caption, .full-table caption { font-weight:bold; margin-bottom:5px; text-align:left; }
+
+.full-table { width:100%; margin-bottom:20px; }
+.full-table th { background:#2a3f54; color:#fff; font-weight:bold; }
+
+.service-status { font-weight:bold; margin-bottom:15px; }
+#serviceStatus { color:#c0392b; }
+
+.signatures { display:flex; justify-content:space-between; margin-top:50px; }
+.signature-box { width:250px; height:80px; border:1px solid #000; touch-action:none; }
+
+.customer-info { margin-top:30px; }
+.customer-info .info-table td {
+    font-size:13px; background:#eef2f5; color:#2a3f54; padding:8px; border:1px solid #ccc;
 }
+.customer-info .info-table caption { font-weight:bold; font-size:14px; margin-bottom:5px; text-align:left; color:#2a3f54; }
 
-function addPaymentRow(){
-  const tbody = document.getElementById("paymentTableBody");
-  const tr = document.createElement("tr");
-  tr.innerHTML = `<td><input type="date"></td><td><input></td><td><input></td><td><input></td><td><input></td>`;
-  tbody.appendChild(tr);
-}
-
-// İmzayı temizle
-function clearSign(id){
-  const canvas = document.getElementById(id);
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-}
-
-// İmza çizimi (iOS uyumlu)
-function enableSign(id){
-  const canvas = document.getElementById(id);
-  const ctx = canvas.getContext('2d');
-  let drawing=false;
-
-  canvas.addEventListener('touchstart', e => { drawing=true; draw(e); });
-  canvas.addEventListener('touchmove', draw);
-  canvas.addEventListener('touchend', e => drawing=false);
-
-  function draw(e){
-    if(!drawing) return;
-    e.preventDefault();
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches[0];
-    ctx.lineWidth=2;
-    ctx.lineCap='round';
-    ctx.strokeStyle='black';
-    ctx.lineTo(touch.clientX-rect.left, touch.clientY-rect.top);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(touch.clientX-rect.left, touch.clientY-rect.top);
-  }
-}
-
-enableSign('customerSign');
-enableSign('techSign');
-
-// Yazdırma
-function printForm(){
-  const container = document.querySelector('.form-container').cloneNode(true);
-
-  // Canvas'ları resim olarak ekle
-  const customerCanvas = document.getElementById('customerSign');
-  const techCanvas = document.getElementById('techSign');
-
-  const custImg = document.createElement('img');
-  custImg.src = customerCanvas.toDataURL();
-  custImg.style.width='250px';
-  container.querySelector('#customerSign').replaceWith(custImg);
-
-  const techImg = document.createElement('img');
-  techImg.src = techCanvas.toDataURL();
-  techImg.style.width='250px';
-  container.querySelector('#techSign').replaceWith(techImg);
-
-  const win = window.open('', '', 'height=900,width=900');
-  win.document.write('<html><head><title>Servis Formu</title>');
-  win.document.write('<link rel="stylesheet" href="style.css">');
-  win.document.write('</head><body>');
-  win.document.write(container.outerHTML);
-  win.document.write('</body></html>');
-  win.document.close();
-  win.focus();
-  win.print();
-}
+.print-button { text-align:center; margin:20px 0; }
+button { padding:10px 20px; font-size:16px; background:#2a3f54; color:#fff; border:none; border-radius:5px; cursor:pointer;}
+input { width:100%; border:none; font-size:13px; }
