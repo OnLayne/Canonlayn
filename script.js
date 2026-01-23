@@ -52,7 +52,7 @@ function enableSign(id){
 enableSign('customerSign');
 enableSign('techSign');
 
-// Yazdırma
+// Yazdırma ve PDF uyumlu logo
 function printForm(){
   const container = document.querySelector('.form-container').cloneNode(true);
 
@@ -70,54 +70,22 @@ function printForm(){
   techImg.style.width='250px';
   container.querySelector('#techSign').replaceWith(techImg);
 
+  // Logo boyutunu sayfa genişliğine göre otomatik ayarlama
+  const logo = container.querySelector('.logo');
+  logo.style.width = 'auto';
+  logo.style.maxWidth = '200px';  // ekran ve yazdırma için üst sınır
+  logo.style.height = 'auto';
+  logo.style.display = 'block';
+  logo.style.margin = '0 auto 10px';
+
   const win = window.open('', '', 'height=900,width=900');
   win.document.write('<html><head><title>Servis Formu</title>');
   win.document.write('<link rel="stylesheet" href="style.css">');
+  win.document.write('<style>@media print{.logo{max-width:200px !important;}}</style>');
   win.document.write('</head><body>');
   win.document.write(container.outerHTML);
   win.document.write('</body></html>');
   win.document.close();
   win.focus();
   win.print();
-}
-function printForm() {
-    const formContent = document.querySelector('.form-container').innerHTML;
-    const styleContent = document.querySelector('link[rel="stylesheet"]').outerHTML;
-
-    // Gizli iframe oluştur
-    const iframe = document.createElement('iframe');
-    iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
-    iframe.style.border = '0';
-    document.body.appendChild(iframe);
-
-    const doc = iframe.contentWindow.document;
-    doc.open();
-    doc.write(`
-        <html>
-        <head>
-            ${styleContent}
-        </head>
-        <body>
-            ${formContent}
-            <script>
-                const canvases = document.querySelectorAll('canvas');
-                canvases.forEach(c => {
-                    const img = document.createElement('img');
-                    img.src = c.toDataURL();
-                    img.style.width = c.width+'px';
-                    img.style.height = c.height+'px';
-                    c.parentNode.replaceChild(img,c);
-                });
-                window.onload=function(){window.focus(); window.print();}
-            <\/script>
-        </body>
-        </html>
-    `);
-    doc.close();
-
-    setTimeout(() => { document.body.removeChild(iframe); }, 1000);
 }
