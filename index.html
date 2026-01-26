@@ -9,10 +9,10 @@
 <body>
 
 <div class="form-container">
-  
-  <!-- Logo ve başlık -->
-  <div class="logo-container">
-      <img src="https://hizliresim.com/1sb5awh" alt="CANTECH Logo" class="logo">
+
+  <!-- Kurumsal Üst Görsel -->
+  <div class="header-image">
+    <img src="https://hizliresim.com/1sb5awh" alt="CANTECH Teknik Servis">
   </div>
 
   <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
@@ -24,23 +24,21 @@
   </div>
 
   <div class="info-tables">
-    <!-- Müşteri Bilgileri -->
     <table class="left-table">
       <caption>MÜŞTERİ BİLGİLERİ</caption>
-      <tr><td>Ad</td><td><input id="customerName" value="Mahmut Saktaş"></td></tr>
-      <tr><td>Telefon</td><td><input id="customerPhone" value="0543 499 6018"></td></tr>
-      <tr><td>Adres</td><td><input id="customerAddress" value="Kadınlar Denizi Mahallesi Ferhat Yapı Kooperatifi Damla Apt Kat 2 Kuşadası/Aydın"></td></tr>
-      <tr><td>Operatör Notu</td><td><input id="operatorNote" value="SU 800 TL BUGÜN"></td></tr>
+      <tr><td>Ad</td><td><input id="customerName"></td></tr>
+      <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
+      <tr><td>Adres</td><td><input id="customerAddress"></td></tr>
+      <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
     </table>
 
-    <!-- Cihaz Bilgileri -->
     <table class="right-table">
       <caption>CİHAZ BİLGİSİ</caption>
-      <tr><td>Cihaz Markası</td><td><input id="deviceBrand" value="Bosch"></td></tr>
-      <tr><td>Cihaz Türü</td><td><input id="deviceType" value="Kombi"></td></tr>
-      <tr><td>Cihaz Modeli</td><td><input id="deviceModel" value="Buderus"></td></tr>
-      <tr><td>Cihaz Seri No</td><td><input id="deviceSerial" value="123456789"></td></tr>
-      <tr><td>Cihaz Arızası</td><td><input id="deviceIssue" value="Isıtmıyor"></td></tr>
+      <tr><td>Cihaz Markası</td><td><input></td></tr>
+      <tr><td>Cihaz Türü</td><td><input></td></tr>
+      <tr><td>Cihaz Modeli</td><td><input></td></tr>
+      <tr><td>Cihaz Seri No</td><td><input></td></tr>
+      <tr><td>Cihaz Arızası</td><td><input></td></tr>
     </table>
   </div>
 
@@ -53,67 +51,58 @@
     </select>
   </div>
 
-  <!-- Serviste Yapılan İşlemler -->
-  <div>
-    <h3>Serviste Yapılan İşlemler</h3>
-    <table class="full-table">
-      <thead>
-        <tr>
-          <th>TARİH</th>
-          <th>İŞLEM ADI</th>
-          <th>AÇIKLAMA</th>
-          <th>Müşteriye Verilen Fiyat</th>
-        </tr>
-      </thead>
-      <tbody id="taskTableBody">
-        <tr>
-          <td><input type="date" value="2026-01-21"></td>
-          <td><input value="Yerinde Bakım Yapıldı"></td>
-          <td><input value="Cihaza yapılan kontrollerde ana kart revize edildi, parçalar değiştirildi..."></td>
-          <td><input value="4.000 TL"></td>
-        </tr>
-      </tbody>
-    </table>
-    <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
-  </div>
+  <h3>Serviste Yapılan İşlemler</h3>
+  <table class="full-table">
+    <thead>
+      <tr>
+        <th>TARİH</th>
+        <th>İŞLEM ADI</th>
+        <th>AÇIKLAMA</th>
+        <th>FİYAT</th>
+      </tr>
+    </thead>
+    <tbody id="taskTableBody"></tbody>
+  </table>
+  <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
 
-  <!-- Para Hareketleri -->
-  <div>
-    <h3>Para Hareketleri</h3>
-    <table class="full-table">
-      <thead><tr><th>TARİH</th><th>TAHSİL EDEN</th><th>ÖDEME ŞEKLİ</th><th>ÖDEME DURUMU</th><th>TUTAR</th></tr></thead>
-      <tbody id="paymentTableBody">
-        <tr>
-          <td><input type="date" value="2026-01-22"></td>
-          <td><input value="MERKEZ SERVİS FABRİKA (Can Karaca)"></td>
-          <td><input value="Nakit"></td>
-          <td><input value="Alındı"></td>
-          <td><input value="4.000,00 TL"></td>
-        </tr>
-      </tbody>
-    </table>
-    <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
-  </div>
+  <h3>Para Hareketleri</h3>
+  <table class="full-table">
+    <thead>
+      <tr>
+        <th>TARİH</th>
+        <th>TAHSİL EDEN</th>
+        <th>ÖDEME ŞEKLİ</th>
+        <th>DURUM</th>
+        <th>TUTAR</th>
+      </tr>
+    </thead>
+    <tbody id="paymentTableBody"></tbody>
+  </table>
+  <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
 
-  <!-- İmzalar ve Müşteri Bilgilendirme -->
+  <!-- İmzalar -->
   <div class="signatures">
-    <div class="left-sign">
-      <table class="info-table">
-        <caption>Müşteri Bilgilendirme</caption>
-        <tr><td>1- YAPILAN İŞLEMLER 1 YIL GARANTİ ALTINDADIR.</td></tr>
-        <tr><td>2- BU SERVİS FORMU FATURA YERİNE GEÇMEZ.</td></tr>
-        <tr><td>3- CAYMA BEDELİ İADESİ YOKTUR.</td></tr>
-        <tr><td>4- TAKILAN PARÇANIN GERİ İADESİ YOKTUR.</td></tr>
-      </table>
+    <div>
       <p>Müşteri İmza</p>
       <canvas id="customerSign" class="signature-box"></canvas>
       <button onclick="clearSign('customerSign')">Temizle</button>
     </div>
-    <div class="right-sign">
+    <div>
       <p>Teknisyen İmza</p>
       <canvas id="techSign" class="signature-box"></canvas>
       <button onclick="clearSign('techSign')">Temizle</button>
     </div>
+  </div>
+
+  <!-- NOTLAR -->
+  <div class="notes">
+    <h4>- NOTLAR -</h4>
+    <ul>
+      <li>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN 1 YIL GARANTİ KAPSAMINDADIR.</li>
+      <li>1 YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN FİRMAMIZ SORUMLU DEĞİLDİR.</li>
+      <li>ÖN ÖDEME İLE ALINAN CİHAZLARDA ÜCRET İADESİ YAPILMAZ.</li>
+      <li>ATÖLYEYE ALINAN CİHAZLARDA İPTAL DURUMUNDA SERVİS VE NAKLİYE BEDELİ TALEP EDİLİR.</li>
+    </ul>
   </div>
 
 </div>
