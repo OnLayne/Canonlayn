@@ -1,87 +1,125 @@
+:root {
+  --main:#1f3a5f;
+  --danger:#c8102e;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
-  margin: 0;
+  background:#f4f6f8;
+  margin:0;
 }
 
 .form-container {
-  max-width: 900px;
-  background: #fff;
-  margin: auto;
-  padding: 30px;
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:25px;
 }
 
-.header-image img {
-  width: 100%;
-  max-height: 180px;
-  object-fit: contain;
-  margin-bottom: 15px;
+.logo-header {
+  text-align:center;
+  border-bottom:2px solid var(--main);
+  padding-bottom:10px;
+  margin-bottom:15px;
+}
+
+.company-logo {
+  max-height:140px;
+  max-width:100%;
 }
 
 .center {
-  text-align: center;
-  color: #2a3f54;
+  text-align:center;
+  color:var(--main);
 }
 
 .top-info {
-  display: flex;
-  justify-content: space-between;
-  margin: 15px 0;
+  display:flex;
+  justify-content:space-between;
+  margin:15px 0;
+  font-weight:bold;
+}
+
+.info-tables {
+  display:flex;
+  gap:20px;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 15px;
+  width:100%;
+  border-collapse:collapse;
 }
 
 td, th {
-  border: 1px solid #ccc;
-  padding: 6px;
-  font-size: 13px;
+  border:1px solid #ccc;
+  padding:6px;
+  font-size:13px;
 }
 
 th {
-  background: #2a3f54;
-  color: #fff;
+  background:var(--main);
+  color:#fff;
 }
 
-input {
-  width: 100%;
-  border: none;
+input, textarea, select {
+  width:100%;
+  border:none;
+  font-size:13px;
+}
+
+.long-text {
+  min-height:70px;
+  resize:vertical;
 }
 
 .signatures {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+  display:flex;
+  justify-content:space-between;
+  margin-top:30px;
 }
 
 .signature-box {
-  width: 250px;
-  height: 80px;
-  border: 1px solid #000;
+  width:250px;
+  height:80px;
+  border:1px solid #000;
 }
 
-.notes {
-  margin-top: 30px;
-  font-size: 12px;
+.notes-table {
+  margin-top:30px;
+  font-size:12px;
 }
 
-.notes h4 {
-  color: red;
-  margin-bottom: 8px;
+.notes-table caption {
+  color:var(--danger);
+  font-weight:bold;
+  text-align:left;
+  margin-bottom:5px;
 }
 
 .print-button {
-  text-align: center;
-  margin: 20px;
+  text-align:center;
+  margin:20px;
 }
 
 button {
-  background: #2a3f54;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  background:var(--main);
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:4px;
+}
+
+/* MOBİL */
+@media(max-width:768px){
+  .info-tables,.signatures{flex-direction:column}
+  .signature-box{width:100%}
+  input,textarea{font-size:16px}
+}
+
+/* PRINT */
+@media print{
+  body *{visibility:hidden}
+  .form-container,.form-container *{visibility:visible}
+  .form-container{position:absolute;left:0;top:0;width:100%}
+  button{display:none}
 }
