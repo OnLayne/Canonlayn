@@ -9,16 +9,22 @@
 <body>
 
 <div class="form-container">
+  
+  <!-- Logo ve başlık -->
+  <div class="logo-container">
+      <img src="https://hizliresim.com/1sb5awh" alt="CANTECH Logo" class="logo">
+  </div>
 
-  <h1 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h1>
-  <h2 class="center">- TEKNİK SERVİS FORMU -</h2>
+  <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
+  <h2 class="center subtitle">- TEKNİK SERVİS FORMU -</h2>
 
   <div class="top-info">
-      <div class="left">Servis No : <span id="serviceNo"></span></div>
-      <div class="right">Servis Yetki No : <span id="serviceAuthNo"></span></div>
+    <div class="left">Servis No : <span id="serviceNo"></span></div>
+    <div class="right">Servis Yetki No : <span id="serviceAuthNo"></span></div>
   </div>
 
   <div class="info-tables">
+    <!-- Müşteri Bilgileri -->
     <table class="left-table">
       <caption>MÜŞTERİ BİLGİLERİ</caption>
       <tr><td>Ad</td><td><input id="customerName" value="Mahmut Saktaş"></td></tr>
@@ -27,6 +33,7 @@
       <tr><td>Operatör Notu</td><td><input id="operatorNote" value="SU 800 TL BUGÜN"></td></tr>
     </table>
 
+    <!-- Cihaz Bilgileri -->
     <table class="right-table">
       <caption>CİHAZ BİLGİSİ</caption>
       <tr><td>Cihaz Markası</td><td><input id="deviceBrand" value="Bosch"></td></tr>
@@ -46,6 +53,7 @@
     </select>
   </div>
 
+  <!-- Serviste Yapılan İşlemler -->
   <div>
     <h3>Serviste Yapılan İşlemler</h3>
     <table class="full-table">
@@ -69,6 +77,7 @@
     <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
   </div>
 
+  <!-- Para Hareketleri -->
   <div>
     <h3>Para Hareketleri</h3>
     <table class="full-table">
@@ -86,8 +95,16 @@
     <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
   </div>
 
+  <!-- İmzalar ve Müşteri Bilgilendirme -->
   <div class="signatures">
     <div class="left-sign">
+      <table class="info-table">
+        <caption>Müşteri Bilgilendirme</caption>
+        <tr><td>1- YAPILAN İŞLEMLER 1 YIL GARANTİ ALTINDADIR.</td></tr>
+        <tr><td>2- BU SERVİS FORMU FATURA YERİNE GEÇMEZ.</td></tr>
+        <tr><td>3- CAYMA BEDELİ İADESİ YOKTUR.</td></tr>
+        <tr><td>4- TAKILAN PARÇANIN GERİ İADESİ YOKTUR.</td></tr>
+      </table>
       <p>Müşteri İmza</p>
       <canvas id="customerSign" class="signature-box"></canvas>
       <button onclick="clearSign('customerSign')">Temizle</button>
@@ -97,18 +114,6 @@
       <canvas id="techSign" class="signature-box"></canvas>
       <button onclick="clearSign('techSign')">Temizle</button>
     </div>
-  </div>
-
-  <div class="customer-info">
-    <table class="info-table">
-      <caption>Müşteri Bilgilendirme</caption>
-      <tr><td>1- YAPILAN İŞLEMLER 1 YIL GARANTİ ALTINDADIR.</td></tr>
-      <tr><td>2- BU SERVİS FORMU FATURA YERİNE GEÇMEZ.</td></tr>
-      <tr><td>3- CAYMA BEDELİ İADESİ YOKTUR.</td></tr>
-      <tr><td>4- TAKILAN PARÇANIN GERİ İADESİ YOKTUR.</td></tr>
-      <tr><td>5- Servis hizmeti süresince her türlü teknik destek tarafımızdan sağlanacaktır.</td></tr>
-      <tr><td>6- Servisimiz müşteri memnuniyetini ön planda tutar, olası sorunlarda tarafınıza dönüş yapılacaktır.</td></tr>
-    </table>
   </div>
 
 </div>
