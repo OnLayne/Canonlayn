@@ -1,5 +1,17 @@
 function autoGrow(el){
   el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+}
+
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll(".desc").forEach((ta, i) => {
+    const printDiv = document.querySelectorAll(".desc-print")[i];
+    printDiv.textContent = ta.value;
+  });
+});
+
+function autoGrow(el){
+  el.style.height = "auto";
   el.style.height = (el.scrollHeight) + "px";
 }
 
