@@ -1,86 +1,35 @@
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f2f2f2;
+  font-family:Helvetica,Arial,sans-serif;
+  background:#f5f5f5;
   margin:0;
 }
-
 .form-container{
-  width:210mm;
-  min-height:297mm;
+  max-width:900px;
   margin:auto;
   background:#fff;
-  padding:15mm;
+  padding:25px;
 }
-
-.center{text-align:center;font-weight:bold}
-.main-title{font-size:20px}
-.subtitle{margin-bottom:10px}
-
-.top-info{
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-.info-tables{
-  display:flex;
-  gap:10px;
-}
-
-table{
-  border-collapse:collapse;
-  width:100%;
-  font-size:11px;
-}
-
-td,th{
-  border:1px solid #000;
-  padding:4px;
-  vertical-align:top;
-}
-
-caption{
-  font-weight:bold;
-  margin-bottom:4px;
-}
-
-.full-table th{
-  background:#2a3f54;
-  color:#fff;
-}
-
-input,select,textarea{
-  width:100%;
-  border:none;
-  font-size:11px;
-  resize:none;
-}
-
-textarea{
-  min-height:40px;
-  white-space:pre-wrap;
-}
-
-.service-status{
-  margin:8px 0;
-  font-weight:bold;
-}
-
-button{
-  margin-top:8px;
-  padding:6px 12px;
-  background:#2a3f54;
-  color:#fff;
-  border:none;
-}
-
-.print-button{
-  text-align:center;
-}
+.center{text-align:center;color:#2a3f54;font-weight:bold}
+.main-title{font-size:22px;margin:0}
+.subtitle{margin:5px 0 15px}
+.top-info{display:flex;justify-content:space-between;margin-bottom:15px}
+.info-tables{display:flex;gap:10px;margin-bottom:15px}
+.left-table,.right-table,.full-table,.notes-table{border-collapse:collapse;width:100%}
+.left-table,.right-table{width:50%}
+td,th{border:1px solid #ccc;padding:6px;font-size:12px}
+caption{font-weight:bold;margin-bottom:5px;text-align:left}
+.full-table th{background:#2a3f54;color:#fff}
+.service-status{margin:10px 0;font-weight:bold}
+.signatures{display:flex;justify-content:space-between;margin-top:20px}
+.signature-box{width:240px;height:70px;border:1px solid #000}
+.notes-table{margin-top:20px}
+.notes-table caption{color:red}
+button{padding:6px 12px;background:#2a3f54;color:#fff;border:none;border-radius:4px}
+input{width:100%;border:none}
+.print-button{text-align:center;margin:15px 0}
 
 @media print{
   body{background:#fff}
   button,.print-button{display:none}
-  .form-container{margin:0;padding:10mm}
+  .form-container{box-shadow:none;margin:0;padding:0}
 }
