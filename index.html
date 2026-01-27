@@ -3,47 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CANTECH Teknik Servis Formu</title>
+<title>CANTECH Servis Formu</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="form-container">
 
-  <!-- LOGO -->
-  <div class="logo-header">
-    <img src="https://i.hizliresim.com/er44tny.jpeg" alt="CANTECH Teknik Servis" class="company-logo">
-  </div>
-
   <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
   <h2 class="center subtitle">- TEKNİK SERVİS FORMU -</h2>
 
   <div class="top-info">
-    <div>Servis No: <span id="serviceNo"></span></div>
-    <div>Servis Yetki No: <span id="serviceAuthNo"></span></div>
+    <div class="left">Servis No : <span id="serviceNo"></span></div>
+    <div class="right">Servis Yetki No : <span id="serviceAuthNo"></span></div>
   </div>
 
   <div class="info-tables">
-    <table>
+    <table class="left-table">
       <caption>MÜŞTERİ BİLGİLERİ</caption>
-      <tr><td>Ad Soyad</td><td><input id="customerName"></td></tr>
+      <tr><td>Ad</td><td><input id="customerName"></td></tr>
       <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
       <tr><td>Adres</td><td><input id="customerAddress"></td></tr>
       <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
     </table>
 
-    <table>
-      <caption>CİHAZ BİLGİLERİ</caption>
-      <tr><td>Marka</td><td><input></td></tr>
-      <tr><td>Tür</td><td><input></td></tr>
-      <tr><td>Model</td><td><input></td></tr>
-      <tr><td>Seri No</td><td><input></td></tr>
-      <tr><td>Arıza</td><td><input></td></tr>
+    <table class="right-table">
+      <caption>CİHAZ BİLGİSİ</caption>
+      <tr><td>Cihaz Markası</td><td><input></td></tr>
+      <tr><td>Cihaz Türü</td><td><input></td></tr>
+      <tr><td>Cihaz Modeli</td><td><input></td></tr>
+      <tr><td>Cihaz Seri No</td><td><input></td></tr>
+      <tr><td>Cihaz Arızası</td><td><input></td></tr>
     </table>
   </div>
 
   <div class="service-status">
-    SERVİS DURUMU:
+    <label>SERVİS DURUMU :</label>
     <select id="serviceStatus">
       <option>Yerinde Bakım Yapıldı</option>
       <option>Atölyeye Alındı</option>
@@ -51,36 +46,34 @@
     </select>
   </div>
 
-  <!-- SERVİSTE YAPILAN İŞLEMLER -->
   <h3>Serviste Yapılan İşlemler</h3>
-  <table class="full-table service-table">
+  <table class="full-table">
     <thead>
       <tr>
-        <th style="width:15%">TARİH</th>
-        <th style="width:20%">İŞLEM</th>
-        <th style="width:45%">AÇIKLAMA</th>
-        <th style="width:20%">FİYAT</th>
+        <th>TARİH</th>
+        <th>İŞLEM ADI</th>
+        <th>AÇIKLAMA</th>
+        <th>FİYAT</th>
       </tr>
     </thead>
     <tbody id="taskTableBody">
       <tr>
         <td><input type="date"></td>
         <td><input></td>
-        <td><textarea class="long-text"></textarea></td>
+        <td><input></td>
         <td><input></td>
       </tr>
     </tbody>
   </table>
   <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
 
-  <!-- PARA -->
   <h3>Para Hareketleri</h3>
   <table class="full-table">
     <thead>
       <tr>
         <th>TARİH</th>
         <th>TAHSİL EDEN</th>
-        <th>ÖDEME</th>
+        <th>ÖDEME ŞEKLİ</th>
         <th>DURUM</th>
         <th>TUTAR</th>
       </tr>
@@ -97,10 +90,9 @@
   </table>
   <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
 
-  <!-- İMZALAR -->
   <div class="signatures">
     <div>
-      <p>Tüketici İmza</p>
+      <p>Müşteri İmza</p>
       <canvas id="customerSign" class="signature-box"></canvas>
       <button onclick="clearSign('customerSign')">Temizle</button>
     </div>
@@ -113,17 +105,17 @@
 
   <!-- NOTLAR -->
   <table class="notes-table">
-    <caption>- NOTLAR -</caption>
-    <tr><td>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ TESLİM TARİHİNDEN İTİBAREN 1 YIL GARANTİ KAPSAMINDADIR.</td></tr>
-    <tr><td>1 YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN FİRMAMIZ SORUMLU DEĞİLDİR.</td></tr>
-    <tr><td>ÖN ÖDEME İLE ALINAN CİHAZLARDA ÜCRET İADESİ YAPILMAZ.</td></tr>
-    <tr><td>ATÖLYEYE ALINAN CİHAZLARDA İPTAL HALİNDE SERVİS VE NAKLİYE BEDELİ TALEP EDİLİR.</td></tr>
+    <caption>NOTLAR</caption>
+    <tr><td>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
+    <tr><td>FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
+    <tr><td>ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
+    <tr><td>ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
   </table>
 
 </div>
 
 <div class="print-button">
-  <button onclick="window.print()">Formu Yazdır (A4)</button>
+  <button onclick="printForm()">Formu Yazdır (A4)</button>
 </div>
 
 <script src="script.js"></script>
