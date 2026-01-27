@@ -131,3 +131,10 @@ textarea.desc{
   margin: 0;
   padding: 0;
 }
+
+/* === MOBİL LOGO BOYUTU === */
+@media (max-width: 768px) {
+  .logo {
+    max-width: 140px;
+  }
+}
