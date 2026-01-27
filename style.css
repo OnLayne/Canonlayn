@@ -1,14 +1,28 @@
-/* Logo */
-.custom-curved-header .logo {
-  max-width: 210px;
-  height: auto;
-  margin-bottom: 24px;
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-curved-header {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.header-content {
+  padding-top: 0.1px;
 }
 
 .logo {
+  display: block;
   max-width: 210px;
   height: auto;
+  margin-top: 0;
   margin-bottom: clamp(20px, 2.5vw, 32px);
+}
+
+.header-content h1 {
+  font-size: 24px;
+  margin: 0;
 }
 
 /* Başlık */
