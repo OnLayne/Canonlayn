@@ -1,3 +1,8 @@
+function autoGrow(el){
+  el.style.height = "auto";
+  el.style.height = (el.scrollHeight) + "px";
+}
+
 document.getElementById("serviceNo").innerText =
 Math.floor(100000 + Math.random()*900000);
 document.getElementById("serviceAuthNo").innerText =
