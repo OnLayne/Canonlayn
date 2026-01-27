@@ -4,8 +4,10 @@ html, body {
 }
 
 .custom-curved-header {
+  position: relative;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .header-inner {
@@ -116,4 +118,16 @@ textarea.desc{
   body{background:#fff}
   button,.print-button{display:none}
   .form-container{box-shadow:none;margin:0;padding:0}
+}
+
+/* === SVG ASIL HAMLE === */
+.header-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
