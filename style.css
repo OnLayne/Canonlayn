@@ -129,16 +129,25 @@ textarea.desc{
   .form-container{box-shadow:none;margin:0;padding:0}
 }
 
-/* === SVG ASIL HAMLE === */
-.header-svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+/* === ÜST BOŞLUK TAM SIFIRLAMA === */
+.custom-curved-header {
+  padding-top: 0;
+  margin-top: 0;
   height: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
+}
+
+.header-inner {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+body {
+  padding-top: 0;
+}
+
+.header-svg {
+  top: auto;
+  bottom: 0;
 }
 
 /* === MOBİL LOGO BOYUTU === */
