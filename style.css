@@ -3,11 +3,10 @@ html, body {
   padding: 0;
 }
 
-.custom-curved-header {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+.custom-curved-header .logo {
+  max-width: 210px;
+  height: auto;
+  margin-bottom: 24px;
 }
 
 .header-inner {
@@ -15,13 +14,10 @@ html, body {
 }
 
 .logo {
-  display: block;
   max-width: 210px;
   height: auto;
-  margin-top: 0;
   margin-bottom: clamp(20px, 2.5vw, 32px);
 }
-
 @media (max-width: 768px) {
   .logo {
     max-width: 140px;
