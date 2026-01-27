@@ -14,17 +14,17 @@
   <h2 class="center subtitle">- TEKNİK SERVİS FORMU -</h2>
 
   <div class="top-info">
-    <div class="left">Servis No : <span id="serviceNo"></span></div>
-    <div class="right">Servis Yetki No : <span id="serviceAuthNo"></span></div>
+    <div>Servis No : <span id="serviceNo"></span></div>
+    <div>Servis Yetki No : <span id="serviceAuthNo"></span></div>
   </div>
 
   <div class="info-tables">
     <table class="left-table">
       <caption>MÜŞTERİ BİLGİLERİ</caption>
-      <tr><td>Ad</td><td><input id="customerName"></td></tr>
-      <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
-      <tr><td>Adres</td><td><input id="customerAddress"></td></tr>
-      <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
+      <tr><td>Ad</td><td><input></td></tr>
+      <tr><td>Telefon</td><td><input></td></tr>
+      <tr><td>Adres</td><td><input></td></tr>
+      <tr><td>Operatör Notu</td><td><input></td></tr>
     </table>
 
     <table class="right-table">
@@ -38,12 +38,8 @@
   </div>
 
   <div class="service-status">
-    <label>SERVİS DURUMU :</label>
-    <select id="serviceStatus">
-      <option>Yerinde Bakım Yapıldı</option>
-      <option>Atölyeye Alındı</option>
-      <option>Servis Sonlandırıldı</option>
-    </select>
+    SERVİS DURUMU :
+    <span id="serviceStatusText">-</span>
   </div>
 
   <h3>Serviste Yapılan İşlemler</h3>
@@ -53,69 +49,18 @@
         <th>TARİH</th>
         <th>İŞLEM ADI</th>
         <th>AÇIKLAMA</th>
-        <th>FİYAT</th>
+        <th>MÜŞTERİYE VERİLEN FİYAT</th>
       </tr>
     </thead>
-    <tbody id="taskTableBody">
-      <tr>
-        <td><input type="date"></td>
-        <td><input></td>
-        <td><input></td>
-        <td><input></td>
-      </tr>
-    </tbody>
+    <tbody id="taskTableBody"></tbody>
   </table>
+
   <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
 
-  <h3>Para Hareketleri</h3>
-  <table class="full-table">
-    <thead>
-      <tr>
-        <th>TARİH</th>
-        <th>TAHSİL EDEN</th>
-        <th>ÖDEME ŞEKLİ</th>
-        <th>DURUM</th>
-        <th>TUTAR</th>
-      </tr>
-    </thead>
-    <tbody id="paymentTableBody">
-      <tr>
-        <td><input type="date"></td>
-        <td><input></td>
-        <td><input></td>
-        <td><input></td>
-        <td><input></td>
-      </tr>
-    </tbody>
-  </table>
-  <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
-
-  <div class="signatures">
-    <div>
-      <p>Müşteri İmza</p>
-      <canvas id="customerSign" class="signature-box"></canvas>
-      <button onclick="clearSign('customerSign')">Temizle</button>
-    </div>
-    <div>
-      <p>Teknisyen İmza</p>
-      <canvas id="techSign" class="signature-box"></canvas>
-      <button onclick="clearSign('techSign')">Temizle</button>
-    </div>
+  <div class="print-button">
+    <button onclick="printForm()">Formu Yazdır (A4)</button>
   </div>
 
-  <!-- NOTLAR -->
-  <table class="notes-table">
-    <caption>NOTLAR</caption>
-    <tr><td>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
-    <tr><td>FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
-    <tr><td>ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
-    <tr><td>ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
-  </table>
-
-</div>
-
-<div class="print-button">
-  <button onclick="printForm()">Formu Yazdır (A4)</button>
 </div>
 
 <script src="script.js"></script>
