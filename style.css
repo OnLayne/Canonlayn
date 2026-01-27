@@ -1,18 +1,8 @@
-/* Üst kavisli header */
-.custom-curved-header {
-  position: relative;
-  width: 100%;
-  background: #0A2342; /* Kurumsal daha koyu mavi tonu */
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 0;
-}
-
 /* Logo */
 .custom-curved-header .logo {
-  max-width: 120px;
+  max-width: 210px;
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 
 /* SVG ile eğimli alt geçiş */
@@ -23,11 +13,10 @@
   margin-top: -5px;
 }
 
-/* Logo */
-.header-content .logo {
-  max-width: 90px;
+.logo {
+  max-width: 210px;
   height: auto;
-  margin-bottom: 12px;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
 }
 
 /* Başlık */
