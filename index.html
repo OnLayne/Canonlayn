@@ -21,10 +21,10 @@
   <div class="info-tables">
     <table class="left-table">
       <caption>MÜŞTERİ BİLGİLERİ</caption>
-      <tr><td>Ad</td><td><input id="customerName"></td></tr>
-      <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
-      <tr><td>Adres</td><td><input id="customerAddress"></td></tr>
-      <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
+      <tr><td>Ad</td><td><input></td></tr>
+      <tr><td>Telefon</td><td><input></td></tr>
+      <tr><td>Adres</td><td><input></td></tr>
+      <tr><td>Operatör Notu</td><td><input></td></tr>
     </table>
 
     <table class="right-table">
@@ -38,7 +38,7 @@
 
   <div class="service-status">
     <label>SERVİS DURUMU :</label>
-    <select id="serviceStatus">
+    <select>
       <option>Yerinde Bakım Yapıldı</option>
       <option>Atölyeye Alındı</option>
       <option>Servis Sonlandırıldı</option>
@@ -60,7 +60,7 @@
       <tr>
         <td><input type="date"></td>
         <td><input></td>
-        <td><input></td>
+        <td><textarea class="desc"></textarea></td>
         <td><input></td>
       </tr>
     </tbody>
@@ -89,28 +89,6 @@
     </tbody>
   </table>
   <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
-
-  <div class="signatures">
-    <div>
-      <p>Müşteri İmza</p>
-      <canvas id="customerSign" class="signature-box"></canvas>
-      <button onclick="clearSign('customerSign')">Temizle</button>
-    </div>
-    <div>
-      <p>Teknisyen İmza</p>
-      <canvas id="techSign" class="signature-box"></canvas>
-      <button onclick="clearSign('techSign')">Temizle</button>
-    </div>
-  </div>
-
-  <!-- NOTLAR -->
-  <table class="notes-table">
-    <caption>NOTLAR</caption>
-    <tr><td>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
-    <tr><td>FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
-    <tr><td>ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
-    <tr><td>ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
-  </table>
 
 </div>
 
