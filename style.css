@@ -1,3 +1,30 @@
+textarea.desc{
+  width:100%;
+  border:none;
+  resize:none;
+  font-family:inherit;
+  font-size:12px;
+  line-height:1.4;
+  white-space:pre-wrap;
+  word-break:break-word;
+  overflow:hidden;
+}
+
+/* Ekranda düz metin gizli */
+.desc-print{
+  display:none;
+  font-size:12px;
+  line-height:1.4;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+/* Yazdırma / Önizleme */
+@media print{
+  textarea.desc{display:none;}
+  .desc-print{display:block;}
+}
+
 body{
   font-family:Helvetica,Arial,sans-serif;
   background:#f5f5f5;
