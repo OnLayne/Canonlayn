@@ -28,6 +28,19 @@ button{padding:6px 12px;background:#2a3f54;color:#fff;border:none;border-radius:
 input{width:100%;border:none}
 .print-button{text-align:center;margin:15px 0}
 
+textarea.desc{
+  width:100%;
+  border:none;
+  resize:none;
+  font-family:inherit;
+  font-size:12px;
+  line-height:1.4;
+  white-space:pre-wrap;
+  word-break:break-word;
+  overflow:hidden;
+  min-height:20px;
+}
+
 /* === SADECE AÇIKLAMA SORUNU ÇÖZÜMÜ === */
 textarea.desc{
   width:100%;
