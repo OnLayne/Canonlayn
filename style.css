@@ -1,3 +1,35 @@
+/* Header ana alan */
+.curved-header {
+  position: relative;
+  background: #0A2342; /* Kurumsal koyu mavi */
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Logo */
+.header-content .logo {
+  max-width: 90px;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+/* Başlık */
+.header-content h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Kavisli alt SVG */
+.header-curve {
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+}
+
 textarea.desc{
   width:100%;
   border:none;
