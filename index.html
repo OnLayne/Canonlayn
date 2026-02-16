@@ -8,10 +8,11 @@
 </head>
 <body>
 
+<!-- Logo Wrapper: Üst ve alt şerit -->
 <div class="header-inner logo-wrapper">
   <img src="logo.png" alt="CANTECH Bölge Merkez Teknik Servis" class="logo">
 </div>
-  
+
 <div class="form-container">
 
   <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
@@ -50,17 +51,11 @@
     </select>
   </div>
 
-<td>
   <textarea class="desc" oninput="autoGrow(this)"></textarea>
   <div class="desc-print"></div>
-</td>
-  
-  <td>
-  <textarea class="desc" oninput="autoGrow(this)"></textarea>
-</td>
 
   <h3>Serviste Yapılan İşlemler</h3>
-  <table class="full-table">
+  <table class="full-table" id="taskTableBody">
     <thead>
       <tr>
         <th>TARİH</th>
@@ -69,7 +64,7 @@
         <th>FİYAT</th>
       </tr>
     </thead>
-    <tbody id="taskTableBody">
+    <tbody>
       <tr>
         <td><input type="date"></td>
         <td><input></td>
@@ -81,7 +76,7 @@
   <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
 
   <h3>Para Hareketleri</h3>
-  <table class="full-table">
+  <table class="full-table" id="paymentTableBody">
     <thead>
       <tr>
         <th>TARİH</th>
@@ -91,7 +86,7 @@
         <th>TUTAR</th>
       </tr>
     </thead>
-    <tbody id="paymentTableBody">
+    <tbody>
       <tr>
         <td><input type="date"></td>
         <td><input></td>
