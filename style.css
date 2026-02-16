@@ -116,3 +116,33 @@ button{
     margin-bottom:10px;
   }
 }
+@media print {
+
+  body {
+    background: #fff;
+  }
+
+  button {
+    display: none;
+  }
+
+  .print-button {
+    display: none;
+  }
+
+  .form-container {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  table, tr, td, th {
+    page-break-inside: avoid;
+  }
+
+  .signature-box {
+    border: 2px solid #000;
+  }
+
+}
