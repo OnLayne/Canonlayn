@@ -5,28 +5,30 @@ html, body {
   background: #f5f5f5;
 }
 
-/* ===== Üst Şerit Logo ===== */
+/* ===== Üstte tek logo ===== */
 .logo-wrapper {
-  width: 100%;                      /* Sayfanın tamamı */
-  height: 60px;                      /* Şerit yüksekliği */
-  background: url('logo.png') repeat-x center;
-  background-size: auto 60px;        /* Logo şerit yüksekliği ile eşleşir */
+  width: 100%;               /* Sayfa genişliği */
+  height: auto;              /* Logo yüksekliğine göre */
+  display: flex;
+  justify-content: center;   /* Ortala */
+  align-items: flex-start; 
   margin: 0;
   padding: 0;
 }
 
-/* Mevcut img'yi gizle */
 .logo-wrapper img {
-  display: none;
+  max-height: 80px;          /* Logo yüksekliği */
+  height: auto;
 }
 
-/* Form container */
+/* Form hemen logonun altından başlasın */
 .form-container {
   max-width: 900px;
   margin: auto;
   background: #fff;
   padding: 25px;
-  margin-top: 0;                     /* Şeride yapışık */
+  margin-top: 0;
+  padding-top: 15px;
 }
 
 /* Genel stiller */
