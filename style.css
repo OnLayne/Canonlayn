@@ -32,7 +32,7 @@ html, body {
   padding-top: 15px;
 }
 
-/* Başlıklar */
+/* Başlık */
 .center { 
   text-align:center; 
   color:#1F8A94; 
@@ -43,7 +43,8 @@ html, body {
 .subtitle{ margin:5px 0 15px }
 
 .top-info{ display:flex; justify-content:space-between; margin-bottom:15px }
-.info-tables{ display:flex; gap:10px; margin-bottom:15px }
+
+.info-tables{ display:flex; margin-bottom:15px }
 
 .left-table,.right-table,.full-table,.notes-table{ border-collapse:collapse; width:100% }
 .left-table,.right-table{ width:50% }
@@ -52,7 +53,7 @@ td, th{ border:1px solid #ccc; padding:6px; font-size:12px; vertical-align:top }
 
 caption{ font-weight:bold; margin-bottom:5px; text-align:left }
 
-/* Sadece renkli alan değişti */
+/* SADECE RENK DEĞİŞTİ */
 .full-table th{ 
   background:#1F8A94; 
   color:#fff 
@@ -79,49 +80,31 @@ textarea.desc{
   word-break:break-word;
 }
 
-/* SIGNATURES */
+/* SIGNATURES (Sadece boyut büyütüldü, layout aynı) */
 
 .signatures{
   display:flex;
   justify-content:space-between;
   margin-top:20px;
-  gap:20px;
 }
 
 .signature-box{
-  width:320px;
-  height:110px;
+  width:300px;
+  height:100px;
   border:2px solid #1F8A94;
-  border-radius:6px;
 }
 
 /* Buttons */
 button{
-  padding:8px 16px;
+  padding:6px 12px;
   background:#1F8A94;
   color:#fff;
   border:none;
-  border-radius:6px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.2s;
+  border-radius:4px;
 }
 
-button:hover{
-  background:#2FAEB8;
-}
-
-/* Mobile Responsive */
-
+/* MOBILE – sadece imza dikey */
 @media (max-width:768px){
-
-  .info-tables{
-    flex-direction:column;
-  }
-
-  .left-table,.right-table{
-    width:100%;
-  }
 
   .signatures{
     flex-direction:column;
@@ -129,10 +112,7 @@ button:hover{
 
   .signature-box{
     width:100%;
-    height:120px;
-  }
-
-  button{
-    width:100%;
+    height:110px;
+    margin-bottom:10px;
   }
 }
