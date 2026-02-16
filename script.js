@@ -10,15 +10,8 @@ window.addEventListener("beforeprint", () => {
   });
 });
 
-function autoGrow(el){
-  el.style.height = "auto";
-  el.style.height = (el.scrollHeight) + "px";
-}
-
-document.getElementById("serviceNo").innerText =
-Math.floor(100000 + Math.random()*900000);
-document.getElementById("serviceAuthNo").innerText =
-Math.floor(10000 + Math.random()*90000);
+document.getElementById("serviceNo").innerText = Math.floor(100000 + Math.random()*900000);
+document.getElementById("serviceAuthNo").innerText = Math.floor(10000 + Math.random()*90000);
 
 function addTaskRow(){
   const tr=document.createElement("tr");
