@@ -1,154 +1,75 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #f5f5f5;
 }
 
-.custom-curved-header .logo {
-  max-width: 210px;
-  height: auto;
-  margin-bottom: 24px;
+/* ===== Logo Wrapper: Üst ve Alt Şerit ===== */
+.logo-wrapper {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: auto;
+  background: url('logo.png') repeat-x top;
+  background-size: auto 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10px;
 }
 
-.header-inner {
-  padding-top: 0;
+.logo-wrapper::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: url('logo.png') repeat-x bottom;
+  background-size: auto 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
-.logo {
-  max-width: 210px;
-  height: auto;
-  margin-bottom: clamp(20px, 2.5vw, 32px);
-}
-@media (max-width: 768px) {
-  .logo {
-    max-width: 140px;
-  }
+/* Mevcut img logo'yu gizle */
+.logo-wrapper img {
+  display: none;
 }
 
-.header-content h1 {
-  font-size: 24px;
-  margin: 0;
+/* Form container */
+.form-container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
 }
 
-/* Başlık */
-.header-content h1 {
-  font-size: 24px;
-  margin: 0;
-}
+/* Genel stiller */
+.center { text-align:center; color:#2a3f54; font-weight:bold }
+.main-title{ font-size:22px; margin:0 }
+.subtitle{ margin:5px 0 15px }
+.top-info{ display:flex; justify-content:space-between; margin-bottom:15px }
+.info-tables{ display:flex; gap:10px; margin-bottom:15px }
+.left-table,.right-table,.full-table,.notes-table{ border-collapse:collapse; width:100% }
+.left-table,.right-table{ width:50% }
+td, th{ border:1px solid #ccc; padding:6px; font-size:12px; vertical-align:top }
+caption{ font-weight:bold; margin-bottom:5px; text-align:left }
+.full-table th{ background:#2a3f54; color:#fff }
+textarea.desc{ width:100%; border:none; resize:none; font-family:inherit; font-size:12px; line-height:1.4; white-space:pre-wrap; word-break:break-word; overflow:hidden; min-height:20px; }
+.desc-print{ display:none; font-size:12px; line-height:1.4; white-space:pre-wrap; word-break:break-word; }
 
-textarea.desc{
-  width:100%;
-  border:none;
-  resize:none;
-  font-family:inherit;
-  font-size:12px;
-  line-height:1.4;
-  white-space:pre-wrap;
-  word-break:break-word;
-  overflow:hidden;
-}
+/* Signatures */
+.signature-box{ width:240px; height:70px; border:1px solid #000 }
 
-/* Ekranda düz metin gizli */
-.desc-print{
-  display:none;
-  font-size:12px;
-  line-height:1.4;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
-
-/* Yazdırma / Önizleme */
-@media print{
-  textarea.desc{display:none;}
-  .desc-print{display:block;}
-}
-
-body{
-  font-family:Helvetica,Arial,sans-serif;
-  background:#f5f5f5;
-  margin:0;
-}
-.form-container{
-  max-width:900px;
-  margin:auto;
-  background:#fff;
-  padding:25px;
-}
-.center{text-align:center;color:#2a3f54;font-weight:bold}
-.main-title{font-size:22px;margin:0}
-.subtitle{margin:5px 0 15px}
-.top-info{display:flex;justify-content:space-between;margin-bottom:15px}
-.info-tables{display:flex;gap:10px;margin-bottom:15px}
-.left-table,.right-table,.full-table,.notes-table{border-collapse:collapse;width:100%}
-.left-table,.right-table{width:50%}
-td,th{border:1px solid #ccc;padding:6px;font-size:12px;vertical-align:top}
-caption{font-weight:bold;margin-bottom:5px;text-align:left}
-.full-table th{background:#2a3f54;color:#fff}
-.service-status{margin:10px 0;font-weight:bold}
-.signatures{display:flex;justify-content:space-between;margin-top:20px}
-.signature-box{width:240px;height:70px;border:1px solid #000}
-.notes-table{margin-top:20px}
-.notes-table caption{color:red}
-button{padding:6px 12px;background:#2a3f54;color:#fff;border:none;border-radius:4px}
-input{width:100%;border:none}
+/* Buttons */
+button{ padding:6px 12px; background:#2a3f54; color:#fff; border:none; border-radius:4px }
 .print-button{text-align:center;margin:15px 0}
 
-textarea.desc{
-  width:100%;
-  border:none;
-  resize:none;
-  font-family:inherit;
-  font-size:12px;
-  line-height:1.4;
-  white-space:pre-wrap;
-  word-break:break-word;
-  overflow:hidden;
-  min-height:20px;
-}
-
-/* === SADECE AÇIKLAMA SORUNU ÇÖZÜMÜ === */
-textarea.desc{
-  width:100%;
-  border:none;
-  resize:none;
-  font-family:inherit;
-  font-size:12px;
-  line-height:1.4;
-  white-space:pre-wrap;
-  word-break:break-word;
-  overflow:visible;
-}
-
-/* Yazdırmada hücre metin kadar uzasın */
-@media print{
-  body{background:#fff}
-  button,.print-button{display:none}
-  .form-container{box-shadow:none;margin:0;padding:0}
-}
-
-/* === ÜST BOŞLUK TAM SIFIRLAMA === */
-.custom-curved-header {
-  padding-top: 0;
-  margin-top: 0;
-  height: auto;
-}
-
-.header-inner {
-  padding-top: 0;
-  margin-top: 0;
-}
-
-body {
-  padding-top: 0;
-}
-
-.header-svg {
-  top: auto;
-  bottom: 0;
-}
-
-/* === MOBİL LOGO BOYUTU === */
-@media (max-width: 768px) {
-  .logo {
-    max-width: 140px;
-  }
+/* Yazdırma ayarları */
+@media print {
+  body{ background:#fff }
+  button,.print-button{ display:none }
+  .form-container{ box-shadow:none; margin:0; padding:0 }
+  textarea.desc{ display:none }
+  .desc-print{ display:block }
 }
