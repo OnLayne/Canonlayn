@@ -59,3 +59,10 @@ function generateAuthNo() {
 }
 
 document.getElementById("serviceAuthNo").textContent = generateAuthNo();
+
+function generateAuthNo() {
+  const random = Math.floor(10000 + Math.random() * 90000);
+  return "FMS-" + random;
+}
+
+document.getElementById("serviceAuthNo").textContent = generateAuthNo();
