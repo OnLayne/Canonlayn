@@ -28,7 +28,12 @@
       <caption>MÜŞTERİ BİLGİLERİ</caption>
       <tr><td>Ad</td><td><input id="customerName"></td></tr>
       <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
-      <tr><td>Adres</td><td><input id="customerAddress"></td></tr>
+      <tr>
+  <td>Adres</td>
+  <td>
+    <textarea id="customerAddress" oninput="autoGrow(this)"></textarea>
+  </td>
+</tr>
       <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
     </table>
 
