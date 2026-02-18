@@ -78,3 +78,13 @@ function autoGrow(el) {
   el.style.height = "auto";
   el.style.height = el.scrollHeight + "px";
 }
+
+function resizeCanvas(canvas) {
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * ratio;
+  canvas.height = canvas.offsetHeight * ratio;
+  canvas.getContext("2d").scale(ratio, ratio);
+}
+
+resizeCanvas(document.getElementById("customerSign"));
+resizeCanvas(document.getElementById("techSign"));
