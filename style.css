@@ -124,6 +124,8 @@ button{
   }
 
   html, body {
+    width: 210mm;
+    height: 297mm;
     margin: 0;
     padding: 0;
     background: #fff;
@@ -134,7 +136,7 @@ button{
     display: none !important;
   }
 
-  /* HEADER FULL WIDTH PRINT FIX */
+  /* HEADER TAM A4 GENİŞLİK */
   .logo-wrapper {
     width: 100% !important;
     margin: 0 !important;
@@ -144,16 +146,18 @@ button{
   .logo-wrapper img {
     width: 100% !important;
     max-width: 100% !important;
+    max-height: none !important;   /* ÖNEMLİ */
+    height: auto !important;
     display: block;
   }
 
-  /* FORM PRINT FULL WIDTH */
+  /* FORM A4 GENİŞLİK */
   .form-container {
-    box-shadow: none;
-    margin: 0;
-    padding: 15px;
-    max-width: 100%;
-    width: 100%;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 15mm !important;
+    box-shadow: none !important;
   }
 
   table, tr, td, th {
