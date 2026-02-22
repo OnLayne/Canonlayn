@@ -128,27 +128,36 @@ async function downloadPDF(){
     backgroundColor:"#ffffff"
   });
 
-  const pdf = new window.jspdf.jsPDF("p","pt","a4");
+  const pdf = new window.jspdf.jsPDF("p","mm","a4");
 
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
+  const pageWidth = 210;
+  const pageHeight = 297;
 
   const imgWidth = pageWidth;
-  const imgHeight = canvas.height * imgWidth / canvas.width;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  let position = 0;
   let heightLeft = imgHeight;
+  let position = 0;
 
-  const imgData = canvas.toDataURL("image/jpeg",1.0);
-
-  pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
-  heightLeft -= pageHeight;
+  const imgData = canvas.toDataURL("image/png"); // JPEG YOK
 
   while(heightLeft > 0){
-    position = heightLeft - imgHeight;
-    pdf.addPage();
-    pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
+
+    if(position > 0){
+      pdf.addPage();
+    }
+
+    pdf.addImage(
+      imgData,
+      "PNG",
+      0,
+      -position - 0.2,      // overlap fix
+      imgWidth,
+      imgHeight + 0.4       // overlap fix
+    );
+
     heightLeft -= pageHeight;
+    position += pageHeight;
   }
 
   pdf.save("Servis-Formu.pdf");
