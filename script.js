@@ -145,3 +145,33 @@ async function downloadPDF(){
 
   window.open(pdfUrl, "_blank");
 }
+
+async function downloadPDF(){
+
+  const element = document.querySelector(".a4-page");
+
+  if(!element){
+    alert("PDF alanı bulunamadı.");
+    return;
+  }
+
+  const canvas = await html2canvas(element,{
+    scale:2,
+    useCORS:true
+  });
+
+  const imgData = canvas.toDataURL("image/jpeg",1.0);
+
+  const pdf = new window.jspdf.jsPDF("p","mm","a4");
+
+  const pageWidth = 210;
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
+
+  // iOS garanti yöntem
+  const pdfData = pdf.output("dataurlstring");
+
+  window.location.href = pdfData;
+}
