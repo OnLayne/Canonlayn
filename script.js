@@ -137,19 +137,26 @@ async function downloadPDF(){
   const pageWidth = 210;
   const pageHeight = 297;
 
-  // 🔥 SAYFAYI BEYAZA BOYA (çizgi engellenir)
-  pdf.setFillColor(255,255,255);
-  pdf.rect(0,0,pageWidth,pageHeight,"F");
-
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  let y = 0;
-  if(imgHeight < pageHeight){
-    y = (pageHeight - imgHeight) / 2;
-  }
+  let heightLeft = imgHeight;
+  let position = 0;
 
-  pdf.addImage(imgData,"PNG",0,y,imgWidth,imgHeight);
+  pdf.setFillColor(255,255,255);
+  pdf.rect(0,0,pageWidth,pageHeight,"F");
+
+  pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
+  heightLeft -= pageHeight;
+
+  while (heightLeft > 0) {
+    position = heightLeft - imgHeight;
+    pdf.addPage();
+    pdf.setFillColor(255,255,255);
+    pdf.rect(0,0,pageWidth,pageHeight,"F");
+    pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
+    heightLeft -= pageHeight;
+  }
 
   pdf.save("Servis-Formu.pdf");
 }
