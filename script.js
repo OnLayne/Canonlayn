@@ -130,6 +130,11 @@ async function downloadPDF(){
 
   pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
 
+  // iOS için en stabil yöntem
+  pdf.save("Servis-Formu.pdf");
+
+}
+  
   const pdfBlob = pdf.output("blob");
   const pdfUrl = URL.createObjectURL(pdfBlob);
 
