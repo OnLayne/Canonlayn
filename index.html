@@ -3,131 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CANTECH Servis Formu</title>
+<title>Teknik Servis Formu</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- FULL WIDTH HEADER -->
-<div class="logo-wrapper">
-  <img src="logo.png" alt="CANTECH Bölge Merkez Teknik Servis">
-</div>
+<div class="a4-page">
 
-<div class="page-wrapper">
-  <div class="form-container">
-
-    <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
-    <h2 class="center subtitle">- TEKNİK SERVİS FORMU -</h2>
-
-    <div class="top-info">
-      <div>Servis No : <span id="serviceNo"></span></div>
-      <div>Servis Yetki No : <span id="serviceAuthNo"></span></div>
+<!-- ÜST BANNER -->
+<div class="top-banner">
+  <div class="banner-inner">
+    <div class="banner-left">
+      <h1>KLİM</h1>
+      <span>ISITMA & SOĞUTMA SİSTEMLERİ</span>
+      <div class="sub">BÖLGE MERKEZ SERVİSİ</div>
     </div>
-
-    <div class="info-tables">
-      <table class="left-table">
-        <caption>MÜŞTERİ BİLGİLERİ</caption>
-        <tr><td>Ad</td><td><input id="customerName"></td></tr>
-        <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
-        <tr>
-          <td>Adres</td>
-          <td><textarea id="customerAddress" class="auto-grow"></textarea></td>
-        </tr>
-        <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
-      </table>
-
-      <table class="right-table">
-        <caption>CİHAZ BİLGİSİ</caption>
-        <tr><td>Cihaz Markası</td><td><input></td></tr>
-        <tr><td>Cihaz Türü</td><td><input></td></tr>
-        <tr><td>Cihaz Model/Seri</td><td><input></td></tr>
-        <tr><td>Cihaz Arızası</td><td><input></td></tr>
-      </table>
+    <div class="banner-right">
+      <div>0850 305 2996</div>
+      <div>GEZİCİ BÖLGE MERKEZ</div>
+      <div>DAYANIKLI TÜKETİM MALLARI</div>
+      <div>TEKNİK FORM</div>
     </div>
-
-    <div class="service-status">
-      <label>SERVİS DURUMU :</label>
-      <select id="serviceStatus">
-        <option>Yerinde Bakım Yapıldı</option>
-        <option>Atölyeye Alındı</option>
-        <option>Servis Sonlandırıldı</option>
-        <option>Parça Siparişi Geçildi</option>
-      </select>
-    </div>
-
-    <textarea class="desc auto-grow" id="serviceDesc"></textarea>
-    <div class="desc-print"></div>
-
-    <h3>Serviste Yapılan İşlemler</h3>
-    <table class="full-table" id="taskTableBody">
-      <thead>
-        <tr>
-          <th>TARİH</th>
-          <th>İŞLEM ADI</th>
-          <th>AÇIKLAMA</th>
-          <th>FİYAT</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="date"></td>
-          <td><input></td>
-          <td><textarea class="auto-grow"></textarea></td>
-          <td><input></td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="no-print" onclick="addTaskRow()">Yeni İşlem Ekle</button>
-
-    <h3>Para Hareketleri</h3>
-    <table class="full-table" id="paymentTableBody">
-      <thead>
-        <tr>
-          <th>TARİH</th>
-          <th>TAHSİL EDEN</th>
-          <th>ÖDEME ŞEKLİ</th>
-          <th>DURUM</th>
-          <th>TUTAR</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="date"></td>
-          <td><input></td>
-          <td><input></td>
-          <td><input></td>
-          <td><input></td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="no-print" onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
-
-    <div class="signatures">
-      <div class="sign-box">
-        <p>Müşteri İmza</p>
-        <canvas id="customerSign" class="signature-box"></canvas>
-        <button class="clear-btn no-print" onclick="clearSign('customerSign')">Temizle</button>
-      </div>
-      <div class="sign-box">
-        <p>Teknisyen İmza</p>
-        <canvas id="techSign" class="signature-box"></canvas>
-        <button class="clear-btn no-print" onclick="clearSign('techSign')">Temizle</button>
-      </div>
-    </div>
-
-    <table class="notes-table">
-      <caption>NOTLAR</caption>
-      <tr><td>YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
-      <tr><td>FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
-      <tr><td>ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
-      <tr><td>ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
-    </table>
-
   </div>
 </div>
 
-<div class="print-button no-print">
-  <button onclick="printForm()">PDF Olarak Yazdır</button>
+<div class="content">
+
+<h2 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h2>
+<h3 class="center subtitle">- TEKNİK SERVİS FORMU -</h3>
+
+<div class="top-info">
+<div>Servis No : <span id="serviceNo"></span></div>
+<div>Servis Yetki No : <span id="serviceAuthNo"></span></div>
+</div>
+
+<div class="two-col">
+
+<table>
+<thead><tr><th colspan="2">MÜŞTERİ BİLGİLERİ</th></tr></thead>
+<tr><td>Ad</td><td><input></td></tr>
+<tr><td>Telefon</td><td><input></td></tr>
+<tr><td>Adres</td><td><textarea class="auto-grow"></textarea></td></tr>
+<tr><td>Operatör Notu</td><td><input></td></tr>
+</table>
+
+<table>
+<thead><tr><th colspan="2">CİHAZ BİLGİSİ</th></tr></thead>
+<tr><td>Cihaz Markası</td><td><input></td></tr>
+<tr><td>Cihaz Türü</td><td><input></td></tr>
+<tr><td>Cihaz Model/Seri</td><td><input></td></tr>
+<tr><td>Cihaz Arızası</td><td><input></td></tr>
+</table>
+
+</div>
+
+<div class="service-status">
+<strong>SERVİS DURUMU :</strong>
+<select>
+<option>Yerinde Bakım Yapıldı</option>
+<option>Atölyeye Alındı</option>
+<option>Servis Sonlandırıldı</option>
+<option>Parça Siparişi Geçildi</option>
+</select>
+</div>
+
+<textarea id="serviceDesc" class="auto-grow service-desc"></textarea>
+<div class="desc-print"></div>
+
+<h4 class="section-title">Serviste Yapılan İşlemler</h4>
+<table>
+<thead>
+<tr>
+<th>TARİH</th>
+<th>İŞLEM ADI</th>
+<th>AÇIKLAMA</th>
+<th>FİYAT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="date"></td>
+<td><input></td>
+<td><textarea class="auto-grow"></textarea></td>
+<td><input></td>
+</tr>
+</tbody>
+</table>
+
+<h4 class="section-title">Para Hareketleri</h4>
+<table>
+<thead>
+<tr>
+<th>TARİH</th>
+<th>TAHSİL EDEN</th>
+<th>ÖDEME ŞEKLİ</th>
+<th>DURUM</th>
+<th>TUTAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="date"></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+</tr>
+</tbody>
+</table>
+
+<div class="signatures">
+<div class="sign-box">
+<div class="sign-title">Müşteri İmza</div>
+<canvas id="customerSign" class="signature-box"></canvas>
+</div>
+
+<div class="sign-box">
+<div class="sign-title">Teknisyen İmza</div>
+<canvas id="techSign" class="signature-box"></canvas>
+</div>
+</div>
+
+<table class="notes">
+<thead><tr><th>NOTLAR</th></tr></thead>
+<tr><td>• YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
+<tr><td>• FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
+<tr><td>• ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
+<tr><td>• ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
+</table>
+
+</div>
 </div>
 
 <script src="script.js"></script>
