@@ -120,6 +120,9 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
+  // PDF modunu aktif et (gölge vs kapansın)
+  document.body.classList.add("pdf-mode");
+
   const canvas = await html2canvas(element,{
     scale:3,
     useCORS:true,
@@ -143,18 +146,13 @@ async function downloadPDF(){
 
   while(heightLeft > 0){
 
-    const renderHeight = Math.min(pageHeight, heightLeft);
-
     if(position > 0){
       pdf.addPage();
     }
 
-    pdf.setFillColor(255,255,255);
-    pdf.rect(0,0,pageWidth,pageHeight,"F");
-
     pdf.addImage(
-      canvas.toDataURL("image/png"),
-      "PNG",
+      canvas.toDataURL("image/jpeg",1.0),
+      "JPEG",
       0,
       -position,
       imgWidth,
@@ -166,4 +164,7 @@ async function downloadPDF(){
   }
 
   pdf.save("Servis-Formu.pdf");
+
+  // PDF modu kapat
+  document.body.classList.remove("pdf-mode");
 }
