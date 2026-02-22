@@ -120,17 +120,10 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
-  if(!element){
-    alert("PDF alanı bulunamadı.");
-    return;
-  }
-
-  // Canvas üret
   const canvas = await html2canvas(element,{
     scale:3,
     useCORS:true,
-    backgroundColor:"#ffffff",
-    scrollY:-window.scrollY
+    backgroundColor:"#ffffff"
   });
 
   const pdf = new window.jspdf.jsPDF({
@@ -142,52 +135,34 @@ async function downloadPDF(){
   const pageWidth = 210;
   const pageHeight = 297;
 
-  // px → mm oranı
-  const pxFullHeight = canvas.height;
-  const pxPageHeight = Math.floor(canvas.width * (pageHeight / pageWidth));
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  let pageCanvas = document.createElement("canvas");
-  let pageCtx = pageCanvas.getContext("2d");
+  let heightLeft = imgHeight;
+  let position = 0;
 
-  pageCanvas.width = canvas.width;
-  pageCanvas.height = pxPageHeight;
+  while(heightLeft > 0){
 
-  let renderedHeight = 0;
-  let pageNumber = 0;
+    const renderHeight = Math.min(pageHeight, heightLeft);
 
-  while(renderedHeight < pxFullHeight){
-
-    // Sayfa canvas'ını temizle
-    pageCtx.fillStyle = "#ffffff";
-    pageCtx.fillRect(0,0,pageCanvas.width,pageCanvas.height);
-
-    // Ana canvas’tan ilgili bölümü kes
-    pageCtx.drawImage(
-      canvas,
-      0,
-      renderedHeight,
-      canvas.width,
-      pxPageHeight,
-      0,
-      0,
-      canvas.width,
-      pxPageHeight
-    );
-
-    const imgData = pageCanvas.toDataURL("image/png");
-
-    if(pageNumber > 0){
+    if(position > 0){
       pdf.addPage();
     }
 
-    // Arka planı beyaza boya (gri çizgi engeli)
     pdf.setFillColor(255,255,255);
     pdf.rect(0,0,pageWidth,pageHeight,"F");
 
-    pdf.addImage(imgData,"PNG",0,0,pageWidth,pageHeight);
+    pdf.addImage(
+      canvas.toDataURL("image/png"),
+      "PNG",
+      0,
+      -position,
+      imgWidth,
+      imgHeight
+    );
 
-    renderedHeight += pxPageHeight;
-    pageNumber++;
+    heightLeft -= pageHeight;
+    position += pageHeight;
   }
 
   pdf.save("Servis-Formu.pdf");
