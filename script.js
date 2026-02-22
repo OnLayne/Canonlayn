@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // Servis No
   document.getElementById("serviceNo").textContent =
     Math.floor(100000 + Math.random()*900000);
 
+  // Yetki No
   function generateAuthNo(){
     return "FMS-" + Math.floor(10000 + Math.random()*90000);
   }
   document.getElementById("serviceAuthNo").textContent = generateAuthNo();
 
+  // Doküman No
+  document.getElementById("docNo").textContent =
+    "FMS-2026-" + Math.floor(1000 + Math.random()*9000);
+
+  // AutoGrow
   function autoGrow(el){
     el.style.height="auto";
     el.style.height=el.scrollHeight+"px";
@@ -18,20 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("input",()=>autoGrow(el));
   });
 
+  // Servis Durumu Vurgu
   const statusSelect=document.getElementById("serviceStatusSelect");
-
   function updateStatusHighlight(){
     statusSelect.classList.add("status-selected");
   }
-
   statusSelect.addEventListener("change",updateStatusHighlight);
   updateStatusHighlight();
 
+  // Print öncesi textarea düz metin
   window.addEventListener("beforeprint",()=>{
     const desc=document.getElementById("serviceDesc");
     document.querySelector(".desc-print").textContent=desc.value;
   });
 
+  // İmza Sistemi
   function setupSignature(id){
     const canvas=document.getElementById(id);
     const ctx=canvas.getContext("2d");
