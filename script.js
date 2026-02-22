@@ -120,56 +120,24 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
-// Gölgeyi geçici kaldır
-element.style.boxShadow = "none";
-  
-  if(!element){
-    alert("PDF alanı bulunamadı.");
-    return;
-  }
+  element.style.boxShadow = "none"; // PDF için gölge kapat
 
   const canvas = await html2canvas(element,{
-    scale:3, // kalite artırıldı
-    useCORS:true,
-    scrollY: -window.scrollY
+    scale:3,
+    useCORS:true
   });
 
   const imgData = canvas.toDataURL("image/jpeg",0.95);
 
-  const pdf = new window.jspdf.jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4"
-  });
+  const pdf = new window.jspdf.jsPDF("p","mm","a4");
 
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-
+  const pageWidth = 210;
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  if(imgHeight <= pageHeight){
-    // Tek sayfaya sığıyorsa
-    pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
-  } else {
-    // Çok uzunsa çoklu sayfa yap
-    let position = 0;
-    let heightLeft = imgHeight;
-
-    pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
-    heightLeft -= pageHeight;
-
-    while(heightLeft > 0){
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
-      heightLeft -= pageHeight;
-    }
-  }
+  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
 
   pdf.save("Servis-Formu.pdf");
 
- // Gölgeyi geri aç
-element.style.boxShadow = "0 0 10px rgba(0,0,0,.2)"; 
-
+  element.style.boxShadow = "0 0 10px rgba(0,0,0,.2)"; // geri aç
 }
