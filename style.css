@@ -150,3 +150,48 @@ textarea{
   }
 
 }
+
+/* ========================= */
+/* TABLO RENK STİLİ */
+/* ========================= */
+
+.full-table thead th{
+  background: linear-gradient(135deg, #0f2f4a, #163d5c);
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #0d2a40;
+}
+
+.full-table tbody tr{
+  background:#f4f6f8;
+}
+
+.full-table tbody tr:nth-child(even){
+  background:#e9edf2;
+}
+
+.left-table caption,
+.right-table caption,
+.notes-table caption{
+  background:#163d5c;
+  color:#fff;
+  padding:6px;
+  font-weight:600;
+  border:1px solid #0d2a40;
+  border-bottom:none;
+}
+
+td, th{
+  border:1px solid #c5ccd3;
+}
+
+/* PRINTTE RENK SOLMASIN */
+@media print{
+  .full-table thead th,
+  .left-table caption,
+  .right-table caption,
+  .notes-table caption{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
