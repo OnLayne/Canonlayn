@@ -61,6 +61,13 @@ justify-content:space-between;
 margin-bottom:20px;
 }
 
+.service-highlight{
+font-weight:700;
+background:#f2f6fb;
+padding:6px 10px;
+border-radius:4px;
+}
+
 .two-col{
 display:flex;
 gap:20px;
@@ -106,6 +113,15 @@ overflow:hidden;
 min-height:50px;
 }
 
+.service-status{
+margin-bottom:15px;
+}
+
+.status-selected{
+color:#c40000;
+font-weight:700;
+}
+
 .signatures{
 display:flex;
 gap:20px;
@@ -135,7 +151,7 @@ background:#0f2f4f;
 }
 
 @media print{
-@page{size:A4;margin:10mm;}
+@page{size:A4;margin:8mm;}
 body{
 background:#fff;
 -webkit-print-color-adjust:exact;
@@ -144,6 +160,18 @@ print-color-adjust:exact;
 .a4-page{
 margin:0;
 box-shadow:none;
+}
+.content{
+padding:10px;
+}
+table{
+margin-bottom:8px;
+}
+.section-title{
+margin-top:12px;
+}
+.signatures{
+margin-top:12px;
 }
 .desc-print{
 white-space:pre-wrap;
