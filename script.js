@@ -120,7 +120,6 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
-  // PDF modunu aktif et (gölge vs kapansın)
   document.body.classList.add("pdf-mode");
 
   const canvas = await html2canvas(element,{
@@ -141,30 +140,53 @@ async function downloadPDF(){
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  let heightLeft = imgHeight;
-  let position = 0;
+  const pageCanvas = document.createElement("canvas");
+  const pageCtx = pageCanvas.getContext("2d");
 
-  while(heightLeft > 0){
+  const pageHeightPx = Math.floor(canvas.width * pageHeight / pageWidth);
 
-    if(position > 0){
+  pageCanvas.width = canvas.width;
+  pageCanvas.height = pageHeightPx;
+
+  let renderedHeight = 0;
+  let pageNumber = 0;
+
+  while(renderedHeight < canvas.height){
+
+    pageCtx.clearRect(0,0,pageCanvas.width,pageCanvas.height);
+
+    pageCtx.drawImage(
+      canvas,
+      0,
+      renderedHeight,
+      canvas.width,
+      pageHeightPx,
+      0,
+      0,
+      canvas.width,
+      pageHeightPx
+    );
+
+    if(pageNumber > 0){
       pdf.addPage();
     }
 
-    pdf.addImage(
-  canvas.toDataURL("image/jpeg",1.0),
-  "JPEG",
-  0,
-  -position - 0.5,   // <<< BURASI ÖNEMLİ
-  imgWidth,
-  imgHeight + 1      // <<< BURASI ÖNEMLİ
-);
+    const imgData = pageCanvas.toDataURL("image/jpeg",1.0);
 
-    heightLeft -= pageHeight;
-    position += pageHeight;
+    pdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      imgWidth,
+      pageHeight
+    );
+
+    renderedHeight += pageHeightPx;
+    pageNumber++;
   }
 
   pdf.save("Servis-Formu.pdf");
 
-  // PDF modu kapat
   document.body.classList.remove("pdf-mode");
 }
