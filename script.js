@@ -118,16 +118,15 @@ function printForm(){
 // ===== PDF İNDİRME (MOBİL UYUMLU) =====
 async function downloadPDF(){
 
-  document.body.classList.add("pdf-mode");
-
   const element = document.querySelector(".a4-page");
 
   const canvas = await html2canvas(element,{
     scale:3,
-    useCORS:true
+    useCORS:true,
+    backgroundColor:"#ffffff"
   });
 
-  const imgData = canvas.toDataURL("image/jpeg",0.95);
+  const imgData = canvas.toDataURL("image/png");
 
   const pdf = new window.jspdf.jsPDF("p","mm","a4");
 
@@ -135,9 +134,7 @@ async function downloadPDF(){
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
+  pdf.addImage(imgData,"PNG",0,0,imgWidth,imgHeight);
 
   pdf.save("Servis-Formu.pdf");
-
-  document.body.classList.remove("pdf-mode");
 }
