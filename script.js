@@ -134,12 +134,20 @@ async function downloadPDF(){
     format:"a4"
   });
 
-  // A4 tam ölçü
   const pageWidth = 210;
   const pageHeight = 297;
 
-  // DİREKT TAM SAYFAYA BAS
-  pdf.addImage(imgData,"PNG",0,0,pageWidth,pageHeight);
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  let y = 0;
+
+  // Eğer yükseklik A4’ten küçükse ortala
+  if(imgHeight < pageHeight){
+    y = (pageHeight - imgHeight) / 2;
+  }
+
+  pdf.addImage(imgData,"PNG",0,y,imgWidth,imgHeight);
 
   pdf.save("Servis-Formu.pdf");
 }
