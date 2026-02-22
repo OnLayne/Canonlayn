@@ -1,3 +1,13 @@
+/* ========================= */
+/* GLOBAL RESET */
+/* ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -7,13 +17,28 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Logo */
+/* ========================= */
+/* PAGE WRAPPER (Safari Fix) */
+/* ========================= */
+
+.page-wrapper{
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background:#fff;
+}
+
+/* ========================= */
+/* LOGO */
+/* ========================= */
+
 .logo-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .logo-wrapper img {
@@ -24,17 +49,19 @@ html, body {
   display: block;
 }
 
-/* Form */
+/* ========================= */
+/* FORM CONTAINER */
+/* ========================= */
+
 .form-container {
-  max-width: 900px;
-  margin: auto;
-  background: #fff;
-  padding: 25px;
-  margin-top: 0;
-  padding-top: 15px;
+  width: 100%;
+  padding: 20px 25px 25px 25px;
 }
 
-/* Başlık */
+/* ========================= */
+/* HEADINGS */
+/* ========================= */
+
 .center { 
   text-align:center; 
   color:#000; 
@@ -59,15 +86,24 @@ html, body {
 
 .info-tables{ 
   display:flex; 
+  gap:10px;
   margin-bottom:15px;
 }
 
-.left-table,.right-table,.full-table,.notes-table{ 
+/* ========================= */
+/* TABLES */
+/* ========================= */
+
+.left-table,
+.right-table,
+.full-table,
+.notes-table{ 
   border-collapse:collapse; 
   width:100%;
 }
 
-.left-table,.right-table{ 
+.left-table,
+.right-table{ 
   width:50%;
 }
 
@@ -85,14 +121,16 @@ caption{
   text-align:left;
 }
 
-/* Tablo başlıkları */
 .full-table th{ 
   background:#000; 
   color:#fff;
   font-weight:600;
 }
 
-/* Açıklama alanı */
+/* ========================= */
+/* TEXTAREA */
+/* ========================= */
+
 textarea.desc{
   width:100%;
   border:none;
@@ -114,10 +152,14 @@ textarea.desc{
   word-break:break-word;
 }
 
+/* ========================= */
 /* SIGNATURES */
+/* ========================= */
+
 .signatures{
   display:flex;
   justify-content:space-between;
+  gap:20px;
   margin-top:20px;
 }
 
@@ -127,7 +169,10 @@ textarea.desc{
   border:2px solid #000;
 }
 
-/* Buttons */
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+
 button{
   padding:6px 12px;
   background:#000;
@@ -135,10 +180,27 @@ button{
   border:none;
   border-radius:4px;
   font-weight:600;
+  cursor:pointer;
 }
 
-/* MOBILE */
+/* ========================= */
+/* MOBILE FIX */
+/* ========================= */
+
 @media (max-width:768px){
+
+  .page-wrapper{
+    max-width:100%;
+  }
+
+  .info-tables{
+    flex-direction:column;
+  }
+
+  .left-table,
+  .right-table{
+    width:100%;
+  }
 
   .signatures{
     flex-direction:column;
@@ -147,12 +209,11 @@ button{
   .signature-box{
     width:100%;
     height:110px;
-    margin-bottom:10px;
   }
 }
 
 /* ========================= */
-/* PRINT OPTIMIZATION BLOĞU */
+/* PRINT OPTIMIZATION */
 /* ========================= */
 
 @media print {
@@ -172,33 +233,21 @@ button{
     print-color-adjust: exact;
   }
 
-  * {
-    text-rendering: geometricPrecision;
-  }
-
   button,
   .print-button {
     display: none !important;
   }
 
-  /* HEADER */
-  .logo-wrapper img {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    image-rendering: -webkit-optimize-contrast;
+  .page-wrapper{
+    width:210mm !important;
+    max-width:210mm !important;
+    margin:0 auto !important;
   }
 
-  /* FORM */
   .form-container {
-    width: 210mm !important;
-    max-width: 210mm !important;
-    margin: 0 auto !important;
     padding: 15mm !important;
-    box-shadow: none !important;
   }
 
-  /* Yazı netliği */
   h1, h2, h3 {
     font-weight: 700 !important;
   }
