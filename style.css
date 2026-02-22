@@ -199,7 +199,10 @@ color:#555;
 }
 
 @media print{
-@page{size:A4;margin:8mm;}
+@page{
+size:A4;
+margin:0;
+}
 body{
 background:#fff;
 -webkit-print-color-adjust:exact;
