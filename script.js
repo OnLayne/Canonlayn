@@ -114,14 +114,39 @@ async function downloadPDF(){
     useCORS:true
   });
 
-  const imgData = canvas.toDataURL("image/jpeg",1.0);
+  // ===== PDF İNDİRME FONKSİYONU =====
+
+async function downloadPDF(){
+
+  const { jsPDF } = window.jspdf;
+  const element = document.querySelector(".a4-page");
+  const btnArea = document.querySelector(".pdf-btn-area");
+
+  btnArea.style.display = "none";
+
+  const canvas = await html2canvas(element,{
+    scale:2,
+    useCORS:true
+  });
+
+  const imgData = canvas.toDataURL("image/jpeg",0.9);
 
   const pdf = new jsPDF("p","mm","a4");
 
   const pdfWidth = 210;
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  const pdfHeight = 297;
 
-  pdf.addImage(imgData,"JPEG",0,0,pdfWidth,pdfHeight);
+  const imgWidth = pdfWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  let finalHeight = imgHeight;
+  if(imgHeight > pdfHeight){
+    finalHeight = pdfHeight;
+  }
+
+  pdf.addImage(imgData,"JPEG",0,0,imgWidth,finalHeight);
 
   pdf.save("Servis-Formu.pdf");
+
+  btnArea.style.display = "block";
 }
