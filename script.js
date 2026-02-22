@@ -118,11 +118,6 @@ function printForm(){
 // ===== PDF İNDİRME (MOBİL UYUMLU) =====
 async function downloadPDF(){
 
-  if (!window.jspdf || !window.jspdf.jsPDF) {
-    alert("PDF kütüphanesi yüklenemedi.");
-    return;
-  }
-
   const element = document.querySelector(".a4-page");
 
   if(!element){
@@ -131,19 +126,43 @@ async function downloadPDF(){
   }
 
   const canvas = await html2canvas(element,{
-    scale:2,
-    useCORS:true
+    scale:3, // kalite artırıldı
+    useCORS:true,
+    scrollY: -window.scrollY
   });
 
-  const imgData = canvas.toDataURL("image/jpeg",1.0);
+  const imgData = canvas.toDataURL("image/jpeg",0.95);
 
-  const pdf = new window.jspdf.jsPDF("p","mm","a4");
+  const pdf = new window.jspdf.jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4"
+  });
 
-  const pageWidth = 210;
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
+  if(imgHeight <= pageHeight){
+    // Tek sayfaya sığıyorsa
+    pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
+  } else {
+    // Çok uzunsa çoklu sayfa yap
+    let position = 0;
+    let heightLeft = imgHeight;
+
+    pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
+    heightLeft -= pageHeight;
+
+    while(heightLeft > 0){
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
+      heightLeft -= pageHeight;
+    }
+  }
 
   pdf.save("Servis-Formu.pdf");
 }
