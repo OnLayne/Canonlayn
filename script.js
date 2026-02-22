@@ -123,67 +123,32 @@ async function downloadPDF(){
   document.body.classList.add("pdf-mode");
 
   const canvas = await html2canvas(element,{
-    scale:3,
+    scale:2,
     useCORS:true,
     backgroundColor:"#ffffff"
   });
 
-  const pdf = new window.jspdf.jsPDF({
-    orientation:"portrait",
-    unit:"mm",
-    format:"a4"
-  });
+  const pdf = new window.jspdf.jsPDF("p","pt","a4");
 
-  const pageWidth = 210;
-  const pageHeight = 297;
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
 
   const imgWidth = pageWidth;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
 
-  const pageCanvas = document.createElement("canvas");
-  const pageCtx = pageCanvas.getContext("2d");
+  let position = 0;
+  let heightLeft = imgHeight;
 
-  const pageHeightPx = Math.floor(canvas.width * pageHeight / pageWidth);
+  const imgData = canvas.toDataURL("image/jpeg",1.0);
 
-  pageCanvas.width = canvas.width;
-  pageCanvas.height = pageHeightPx;
+  pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
+  heightLeft -= pageHeight;
 
-  let renderedHeight = 0;
-  let pageNumber = 0;
-
-  while(renderedHeight < canvas.height){
-
-    pageCtx.clearRect(0,0,pageCanvas.width,pageCanvas.height);
-
-    pageCtx.drawImage(
-      canvas,
-      0,
-      renderedHeight,
-      canvas.width,
-      pageHeightPx,
-      0,
-      0,
-      canvas.width,
-      pageHeightPx
-    );
-
-    if(pageNumber > 0){
-      pdf.addPage();
-    }
-
-    const imgData = pageCanvas.toDataURL("image/jpeg",1.0);
-
-    pdf.addImage(
-      imgData,
-      "JPEG",
-      0,
-      0,
-      imgWidth,
-      pageHeight
-    );
-
-    renderedHeight += pageHeightPx;
-    pageNumber++;
+  while(heightLeft > 0){
+    position = heightLeft - imgHeight;
+    pdf.addPage();
+    pdf.addImage(imgData,"JPEG",0,position,imgWidth,imgHeight);
+    heightLeft -= pageHeight;
   }
 
   pdf.save("Servis-Formu.pdf");
