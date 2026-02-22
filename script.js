@@ -103,66 +103,17 @@ function printForm(){
   window.print();
 }
 
-async function downloadPDF(){
 
-  const { jsPDF } = window.jspdf;
-
-  const element = document.querySelector(".a4-page");
-
-  const canvas = await html2canvas(element,{
-    scale:2, // yüksek kalite
-    useCORS:true
-  });
-
-  // ===== PDF İNDİRME FONKSİYONU =====
+// ===== MOBİL UYUMLU PDF =====
 
 async function downloadPDF(){
 
-  const { jsPDF } = window.jspdf;
   const element = document.querySelector(".a4-page");
-  const btnArea = document.querySelector(".pdf-btn-area");
-
-  btnArea.style.display = "none";
-
-  const canvas = await html2canvas(element,{
-    scale:2,
-    useCORS:true
-  });
-
-  async function downloadPDF(){
-
-  const { jsPDF } = window.jspdf;
-  const element = document.querySelector(".a4-page");
-  const btnArea = document.querySelector(".pdf-btn-area");
-
-  btnArea.style.display = "none";
-
-  const canvas = await html2canvas(element,{
-    scale:2,
-    useCORS:true
-  });
-
-  async function downloadPDF(){
-
-  if (typeof html2canvas === "undefined") {
-    alert("html2canvas yüklenmemiş.");
-    return;
-  }
-
-  if (typeof jspdf === "undefined") {
-    alert("jsPDF yüklenmemiş.");
-    return;
-  }
-
-  const element = document.querySelector(".a4-page");
-  const btnArea = document.querySelector(".pdf-btn-area");
 
   if(!element){
-    alert("PDF alanı bulunamadı.");
+    alert("PDF alanı bulunamadı");
     return;
   }
-
-  btnArea.style.display = "none";
 
   const canvas = await html2canvas(element,{
     scale:2,
@@ -173,22 +124,14 @@ async function downloadPDF(){
 
   const pdf = new jspdf.jsPDF("p","mm","a4");
 
-  const pdfWidth = 210;
-  const pdfHeight = 297;
-
-  const imgWidth = pdfWidth;
+  const pageWidth = 210;
+  const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-  const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
 
-  const finalWidth = imgWidth * ratio;
-  const finalHeight = imgHeight * ratio;
+  const pdfBlob = pdf.output("blob");
+  const pdfUrl = URL.createObjectURL(pdfBlob);
 
-  const x = (pdfWidth - finalWidth) / 2;
-
-  pdf.addImage(imgData,"JPEG",x,0,finalWidth,finalHeight);
-
-  pdf.save("Servis-Formu.pdf");
-
-  btnArea.style.display = "block";
+  window.open(pdfUrl, "_blank");
 }
