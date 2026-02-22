@@ -120,13 +120,18 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
+  if(!element){
+    alert("PDF alanı bulunamadı.");
+    return;
+  }
+
+  // Canvas üret
   const canvas = await html2canvas(element,{
     scale:3,
     useCORS:true,
-    backgroundColor:"#ffffff"
+    backgroundColor:"#ffffff",
+    scrollY:-window.scrollY
   });
-
-  const imgData = canvas.toDataURL("image/png");
 
   const pdf = new window.jspdf.jsPDF({
     orientation:"portrait",
@@ -137,25 +142,52 @@ async function downloadPDF(){
   const pageWidth = 210;
   const pageHeight = 297;
 
-  const imgWidth = pageWidth;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  // px → mm oranı
+  const pxFullHeight = canvas.height;
+  const pxPageHeight = Math.floor(canvas.width * (pageHeight / pageWidth));
 
-  let heightLeft = imgHeight;
-  let position = 0;
+  let pageCanvas = document.createElement("canvas");
+  let pageCtx = pageCanvas.getContext("2d");
 
-  pdf.setFillColor(255,255,255);
-  pdf.rect(0,0,pageWidth,pageHeight,"F");
+  pageCanvas.width = canvas.width;
+  pageCanvas.height = pxPageHeight;
 
-  pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
-  heightLeft -= pageHeight;
+  let renderedHeight = 0;
+  let pageNumber = 0;
 
-  while (heightLeft > 0) {
-    position = heightLeft - imgHeight;
-    pdf.addPage();
+  while(renderedHeight < pxFullHeight){
+
+    // Sayfa canvas'ını temizle
+    pageCtx.fillStyle = "#ffffff";
+    pageCtx.fillRect(0,0,pageCanvas.width,pageCanvas.height);
+
+    // Ana canvas’tan ilgili bölümü kes
+    pageCtx.drawImage(
+      canvas,
+      0,
+      renderedHeight,
+      canvas.width,
+      pxPageHeight,
+      0,
+      0,
+      canvas.width,
+      pxPageHeight
+    );
+
+    const imgData = pageCanvas.toDataURL("image/png");
+
+    if(pageNumber > 0){
+      pdf.addPage();
+    }
+
+    // Arka planı beyaza boya (gri çizgi engeli)
     pdf.setFillColor(255,255,255);
     pdf.rect(0,0,pageWidth,pageHeight,"F");
-    pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
-    heightLeft -= pageHeight;
+
+    pdf.addImage(imgData,"PNG",0,0,pageWidth,pageHeight);
+
+    renderedHeight += pxPageHeight;
+    pageNumber++;
   }
 
   pdf.save("Servis-Formu.pdf");
