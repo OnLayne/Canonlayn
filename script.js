@@ -151,13 +151,13 @@ async function downloadPDF(){
     }
 
     pdf.addImage(
-      canvas.toDataURL("image/jpeg",1.0),
-      "JPEG",
-      0,
-      -position,
-      imgWidth,
-      imgHeight
-    );
+  canvas.toDataURL("image/jpeg",1.0),
+  "JPEG",
+  0,
+  -position - 0.5,   // <<< BURASI ÖNEMLİ
+  imgWidth,
+  imgHeight + 1      // <<< BURASI ÖNEMLİ
+);
 
     heightLeft -= pageHeight;
     position += pageHeight;
