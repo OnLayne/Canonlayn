@@ -78,6 +78,7 @@ table{
 width:100%;
 border-collapse:collapse;
 margin-bottom:15px;
+border:1px solid #999;   /* sadece dış çerçeve */
 }
 
 th{
@@ -85,10 +86,11 @@ background:#0f2f4f;
 color:#fff;
 font-size:12px;
 padding:6px;
+border:none;            /* başlıkta iç çizgi yok */
 }
 
 td{
-border:1px solid #999;
+border:none;            /* hücre iç çizgileri kaldırıldı */
 padding:6px;
 font-size:12px;
 }
