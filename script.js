@@ -39,59 +39,68 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".desc-print").textContent=desc.value;
   });
 
-  // İmza Sistemi
+  // ===== İMZA SİSTEMİ (DÜZELTİLMİŞ) =====
   function setupSignature(id){
-    const canvas=document.getElementById(id);
-    const ctx=canvas.getContext("2d");
+    const canvas = document.getElementById(id);
+    const ctx = canvas.getContext("2d");
 
     function resize(){
-      const ratio=window.devicePixelRatio||1;
-      const rect=canvas.getBoundingClientRect();
-      canvas.width=rect.width*ratio;
-      canvas.height=rect.height*ratio;
-      ctx.scale(ratio,ratio);
-      ctx.lineWidth=2;
-      ctx.lineCap="round";
-    }
-    resize();
-    window.addEventListener("resize",resize);
+      const ratio = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
 
-    let drawing=false;
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.scale(ratio, ratio);
+
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "#000";
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    let drawing = false;
 
     function getPos(e){
-      const rect=canvas.getBoundingClientRect();
-      const touch=e.touches?e.touches[0]:e;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches ? e.touches[0] : e;
+
       return {
-        x:touch.clientX-rect.left,
-        y:touch.clientY-rect.top
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top
       };
     }
 
     function start(e){
-      drawing=true;
-      const pos=getPos(e);
+      drawing = true;
+      const pos = getPos(e);
       ctx.beginPath();
-      ctx.moveTo(pos.x,pos.y);
+      ctx.moveTo(pos.x, pos.y);
     }
 
     function move(e){
-      if(!drawing)return;
+      if(!drawing) return;
       e.preventDefault();
-      const pos=getPos(e);
-      ctx.lineTo(pos.x,pos.y);
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
     }
 
-    function end(){drawing=false;}
+    function end(){
+      drawing = false;
+    }
 
-    canvas.addEventListener("mousedown",start);
-    canvas.addEventListener("mousemove",move);
-    canvas.addEventListener("mouseup",end);
-    canvas.addEventListener("mouseleave",end);
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", move);
+    canvas.addEventListener("mouseup", end);
+    canvas.addEventListener("mouseleave", end);
 
-    canvas.addEventListener("touchstart",start,{passive:false});
-    canvas.addEventListener("touchmove",move,{passive:false});
-    canvas.addEventListener("touchend",end);
+    canvas.addEventListener("touchstart", start, { passive:false });
+    canvas.addEventListener("touchmove", move, { passive:false });
+    canvas.addEventListener("touchend", end);
   }
 
   setupSignature("customerSign");
@@ -99,19 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+// ===== PRINT =====
 function printForm(){
   window.print();
 }
 
 
-// ===== MOBİL UYUMLU PDF =====
-
+// ===== PDF İNDİRME (MOBİL UYUMLU) =====
 async function downloadPDF(){
+
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF kütüphanesi yüklenemedi.");
+    return;
+  }
 
   const element = document.querySelector(".a4-page");
 
   if(!element){
-    alert("PDF alanı bulunamadı");
+    alert("PDF alanı bulunamadı.");
     return;
   }
 
@@ -120,9 +135,9 @@ async function downloadPDF(){
     useCORS:true
   });
 
-  const imgData = canvas.toDataURL("image/jpeg",0.95);
+  const imgData = canvas.toDataURL("image/jpeg",1.0);
 
-  const pdf = new jspdf.jsPDF("p","mm","a4");
+  const pdf = new window.jspdf.jsPDF("p","mm","a4");
 
   const pageWidth = 210;
   const imgWidth = pageWidth;
@@ -130,8 +145,5 @@ async function downloadPDF(){
 
   pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
 
-  const pdfBlob = pdf.output("blob");
-  const pdfUrl = URL.createObjectURL(pdfBlob);
-
-  window.open(pdfUrl, "_blank");
+  pdf.save("Servis-Formu.pdf");
 }
