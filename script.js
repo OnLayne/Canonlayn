@@ -118,9 +118,9 @@ function printForm(){
 // ===== PDF İNDİRME (MOBİL UYUMLU) =====
 async function downloadPDF(){
 
-  const element = document.querySelector(".a4-page");
+  document.body.classList.add("pdf-mode");
 
-  element.style.boxShadow = "none"; // PDF için gölge kapat
+  const element = document.querySelector(".a4-page");
 
   const canvas = await html2canvas(element,{
     scale:3,
@@ -139,5 +139,5 @@ async function downloadPDF(){
 
   pdf.save("Servis-Formu.pdf");
 
-  element.style.boxShadow = "0 0 10px rgba(0,0,0,.2)"; // geri aç
+  document.body.classList.remove("pdf-mode");
 }
