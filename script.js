@@ -102,3 +102,26 @@ document.addEventListener("DOMContentLoaded", () => {
 function printForm(){
   window.print();
 }
+
+async function downloadPDF(){
+
+  const { jsPDF } = window.jspdf;
+
+  const element = document.querySelector(".a4-page");
+
+  const canvas = await html2canvas(element,{
+    scale:2, // yüksek kalite
+    useCORS:true
+  });
+
+  const imgData = canvas.toDataURL("image/jpeg",1.0);
+
+  const pdf = new jsPDF("p","mm","a4");
+
+  const pdfWidth = 210;
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  pdf.addImage(imgData,"JPEG",0,0,pdfWidth,pdfHeight);
+
+  pdf.save("Servis-Formu.pdf");
+}
