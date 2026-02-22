@@ -137,12 +137,14 @@ async function downloadPDF(){
   const pageWidth = 210;
   const pageHeight = 297;
 
+  // 🔥 SAYFAYI BEYAZA BOYA (çizgi engellenir)
+  pdf.setFillColor(255,255,255);
+  pdf.rect(0,0,pageWidth,pageHeight,"F");
+
   const imgWidth = pageWidth;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
   let y = 0;
-
-  // Eğer yükseklik A4’ten küçükse ortala
   if(imgHeight < pageHeight){
     y = (pageHeight - imgHeight) / 2;
   }
