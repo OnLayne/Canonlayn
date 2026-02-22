@@ -133,6 +133,9 @@ page-break-inside:avoid;
 flex:1;
 border:1px solid #999;
 }
+.pdf-mode .a4-page{
+  box-shadow:none !important;
+}
 
 .sign-title{
 background:#0f2f4f;
