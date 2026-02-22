@@ -120,6 +120,9 @@ async function downloadPDF(){
 
   const element = document.querySelector(".a4-page");
 
+// Gölgeyi geçici kaldır
+element.style.boxShadow = "none";
+  
   if(!element){
     alert("PDF alanı bulunamadı.");
     return;
@@ -165,4 +168,8 @@ async function downloadPDF(){
   }
 
   pdf.save("Servis-Formu.pdf");
+
+ // Gölgeyi geri aç
+element.style.boxShadow = "0 0 10px rgba(0,0,0,.2)"; 
+
 }
