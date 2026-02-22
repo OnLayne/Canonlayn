@@ -128,13 +128,18 @@ async function downloadPDF(){
 
   const imgData = canvas.toDataURL("image/png");
 
-  const pdf = new window.jspdf.jsPDF("p","mm","a4");
+  const pdf = new window.jspdf.jsPDF({
+    orientation:"portrait",
+    unit:"mm",
+    format:"a4"
+  });
 
+  // A4 tam ölçü
   const pageWidth = 210;
-  const imgWidth = pageWidth;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const pageHeight = 297;
 
-  pdf.addImage(imgData,"PNG",0,0,imgWidth,imgHeight);
+  // DİREKT TAM SAYFAYA BAS
+  pdf.addImage(imgData,"PNG",0,0,pageWidth,pageHeight);
 
   pdf.save("Servis-Formu.pdf");
 }
