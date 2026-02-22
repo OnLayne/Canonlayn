@@ -251,3 +251,14 @@ border-radius:3px;
 display:none;
 }
 }
+.pdf-mode .a4-page{
+  box-shadow:none !important;
+  background:#ffffff !important;
+}
+
+.pdf-mode body{
+  background:#ffffff !important;
+}
+
+
+
