@@ -118,28 +118,41 @@ function printForm(){
 // ===== PDF İNDİRME (MOBİL UYUMLU) =====
 async function downloadPDF(){
 
-  const element = document.querySelector(".a4-page");
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p","mm","a4");
 
-  document.body.classList.add("pdf-mode");
+  let y = 20;
 
-  const canvas = await html2canvas(element,{
-    scale: 3, // 2 yerine 3
-    useCORS:true,
-    backgroundColor:"#ffffff",
-    logging:false,
-    letterRendering:true
-  });
+  function line(text){
+    pdf.text(text, 15, y);
+    y += 8;
+  }
 
-  const imgData = canvas.toDataURL("image/jpeg", 1.0);
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(16);
+  pdf.text("TEKNİK SERVİS FORMU", 105, 15, { align: "center" });
 
-  const pdf = new window.jspdf.jsPDF("p","mm","a4");
+  pdf.setFontSize(11);
+  pdf.setFont("helvetica","normal");
 
-  const imgWidth = 210;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  line("MÜŞTERİ BİLGİLERİ");
+  line("Ad: " + document.querySelector("[name=customerName]").value);
+  line("Telefon: " + document.querySelector("[name=customerPhone]").value);
+  line("Adres: " + document.querySelector("[name=customerAddress]").value);
+  line("Operatör Notu: " + document.querySelector("[name=operatorNote]").value);
 
-  pdf.addImage(imgData,"JPEG",0,0,imgWidth,imgHeight);
+  y += 5;
+
+  line("CİHAZ BİLGİSİ");
+  line("Marka: " + document.querySelector("[name=brand]").value);
+  line("Tür: " + document.querySelector("[name=type]").value);
+  line("Model: " + document.querySelector("[name=model]").value);
+  line("Arıza: " + document.querySelector("[name=fault]").value);
+
+  y += 5;
+
+  line("Servis Durumu: " + document.getElementById("serviceStatusSelect").value);
+  line("Servis Açıklama: " + document.getElementById("serviceDesc").value);
 
   pdf.save("Servis-Formu.pdf");
-
-  document.body.classList.remove("pdf-mode");
 }
