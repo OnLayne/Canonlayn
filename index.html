@@ -12,11 +12,10 @@
 <div class="logo-wrapper">
   <img src="logo.png" alt="CANTECH Bölge Merkez Teknik Servis">
 </div>
-  
-<!-- ORTALANMIŞ İÇERİK -->
+
 <div class="page-wrapper">
   <div class="form-container">
-    
+
     <h1 class="center main-title">BÖLGE MERKEZ TEKNİK SERVİS</h1>
     <h2 class="center subtitle">- TEKNİK SERVİS FORMU -</h2>
 
@@ -32,7 +31,7 @@
         <tr><td>Telefon</td><td><input id="customerPhone"></td></tr>
         <tr>
           <td>Adres</td>
-          <td><textarea id="customerAddress" oninput="autoGrow(this)"></textarea></td>
+          <td><textarea id="customerAddress" class="auto-grow"></textarea></td>
         </tr>
         <tr><td>Operatör Notu</td><td><input id="operatorNote"></td></tr>
       </table>
@@ -56,7 +55,7 @@
       </select>
     </div>
 
-    <textarea class="desc" oninput="autoGrow(this)"></textarea>
+    <textarea class="desc auto-grow" id="serviceDesc"></textarea>
     <div class="desc-print"></div>
 
     <h3>Serviste Yapılan İşlemler</h3>
@@ -73,12 +72,12 @@
         <tr>
           <td><input type="date"></td>
           <td><input></td>
-          <td><textarea class="desc"></textarea></td>
+          <td><textarea class="auto-grow"></textarea></td>
           <td><input></td>
         </tr>
       </tbody>
     </table>
-    <button onclick="addTaskRow()">Yeni İşlem Ekle</button>
+    <button class="no-print" onclick="addTaskRow()">Yeni İşlem Ekle</button>
 
     <h3>Para Hareketleri</h3>
     <table class="full-table" id="paymentTableBody">
@@ -101,18 +100,18 @@
         </tr>
       </tbody>
     </table>
-    <button onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
+    <button class="no-print" onclick="addPaymentRow()">Yeni Ödeme Ekle</button>
 
     <div class="signatures">
-      <div>
+      <div class="sign-box">
         <p>Müşteri İmza</p>
         <canvas id="customerSign" class="signature-box"></canvas>
-        <button onclick="clearSign('customerSign')">Temizle</button>
+        <button class="clear-btn no-print" onclick="clearSign('customerSign')">Temizle</button>
       </div>
-      <div>
+      <div class="sign-box">
         <p>Teknisyen İmza</p>
         <canvas id="techSign" class="signature-box"></canvas>
-        <button onclick="clearSign('techSign')">Temizle</button>
+        <button class="clear-btn no-print" onclick="clearSign('techSign')">Temizle</button>
       </div>
     </div>
 
@@ -125,11 +124,10 @@
     </table>
 
   </div>
-
 </div>
 
-<div class="print-button">
-  <button onclick="printForm()">Formu Yazdır (A4)</button>
+<div class="print-button no-print">
+  <button onclick="printForm()">PDF Olarak Yazdır</button>
 </div>
 
 <script src="script.js"></script>
