@@ -1,16 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Servis No
   document.getElementById("serviceNo").textContent =
     Math.floor(100000 + Math.random()*900000);
 
-  // Yetki No (tek tanım)
   function generateAuthNo(){
     return "FMS-" + Math.floor(10000 + Math.random()*90000);
   }
   document.getElementById("serviceAuthNo").textContent = generateAuthNo();
 
-  // AutoGrow
   function autoGrow(el){
     el.style.height="auto";
     el.style.height=el.scrollHeight+"px";
@@ -21,13 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
     el.addEventListener("input",()=>autoGrow(el));
   });
 
-  // Print öncesi textarea → düz metin
+  const statusSelect=document.getElementById("serviceStatusSelect");
+
+  function updateStatusHighlight(){
+    statusSelect.classList.add("status-selected");
+  }
+
+  statusSelect.addEventListener("change",updateStatusHighlight);
+  updateStatusHighlight();
+
   window.addEventListener("beforeprint",()=>{
     const desc=document.getElementById("serviceDesc");
     document.querySelector(".desc-print").textContent=desc.value;
   });
 
-  // İmza sistemi (yüksek DPI)
   function setupSignature(id){
     const canvas=document.getElementById(id);
     const ctx=canvas.getContext("2d");
@@ -84,33 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupSignature("customerSign");
   setupSignature("techSign");
-
-  window.clearSign=function(id){
-    const canvas=document.getElementById(id);
-    const ctx=canvas.getContext("2d");
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-  };
-
-  window.addTaskRow=function(){
-    const tr=document.createElement("tr");
-    tr.innerHTML=`
-      <td><input type="date"></td>
-      <td><input></td>
-      <td><textarea class="auto-grow"></textarea></td>
-      <td><input></td>`;
-    document.querySelector("#taskTableBody tbody").appendChild(tr);
-  };
-
-  window.addPaymentRow=function(){
-    const tr=document.createElement("tr");
-    tr.innerHTML=`
-      <td><input type="date"></td>
-      <td><input></td>
-      <td><input></td>
-      <td><input></td>
-      <td><input></td>`;
-    document.querySelector("#paymentTableBody tbody").appendChild(tr);
-  };
 
 });
 
