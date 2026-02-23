@@ -3,163 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teknik Servis Formu</title>
+<title>Bölge Merkez Teknik Servis Formu</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="a4-page">
-
-<div class="top-banner">
-  <div class="banner-inner">
-    <div class="banner-left">
-      <h1>İKLİM</h1>
-      <span>ISITMA & SOĞUTMA SİSTEMLERİ</span>
-      <div class="sub">BÖLGE MERKEZ SERVİSİ</div>
-    </div>
-    <div class="banner-right">
-      <div>0850 305 2996</div>
-      <div>GEZİCİ BÖLGE MERKEZ</div>
-      <div>DAYANIKLI TÜKETİM MALLARI</div>
-      <div>TEKNİK FORM</div>
-    </div>
-  </div>
-</div>
-
-<div class="pdf-btn-area">
+<div class="pdf-mobile-bar">
   <button onclick="downloadPDF()">PDF İndir</button>
 </div>
-  
-<div class="content">
 
-<h2 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h2>
-<h3 class="center subtitle">- TEKNİK SERVİS FORMU -</h3>
+<div class="a4-page" id="formArea">
 
-<div class="top-info">
-<div class="service-highlight">Servis No : <span id="serviceNo"></span></div>
-<div class="service-highlight">Servis Yetki No : <span id="serviceAuthNo"></span></div>
-</div>
+  <!-- ===== TOP BANNER ===== -->
+  <div class="top-banner">
+    <div class="banner-inner">
 
-<div class="two-col">
+      <div class="banner-left">
+        <div class="logo-box">
+          <div class="logo-main">KLİM</div>
+          <div class="logo-sub">ISITMA & SOĞUTMA SİSTEMLERİ</div>
+          <div class="logo-tag">BÖLGE MERKEZ SERVİSİ</div>
+        </div>
+      </div>
 
-<table>
-<thead><tr><th colspan="2">MÜŞTERİ BİLGİLERİ</th></tr></thead>
-<tr><td>Ad</td><td><input name="customerName"></td></tr>
-<tr><td>Telefon</td><td><input name="customerPhone"></td></tr>
-<tr><td>Adres</td><td><textarea name="customerAddress"></textarea></td></tr>
-<tr><td>Operatör Notu</td><td><input name="operatorNote"></td></tr>
-</table>
+      <div class="banner-right">
+        <div class="banner-item">📞 0850 305 2996</div>
+        <div class="banner-item">🚚 GEZİCİ BÖLGE MERKEZ</div>
+        <div class="banner-item">🛡️ DAYANIKLI TÜKETİM MALLARI</div>
+        <div class="banner-item">🛠️ TEKNİK FORM</div>
+      </div>
 
-<table>
-<thead><tr><th colspan="2">CİHAZ BİLGİSİ</th></tr></thead>
-<tr><td>Cihaz Markası</td><td><input name="brand"></td></tr>
-<tr><td>Cihaz Türü</td><td><input name="type"></td></tr>
-<tr><td>Cihaz Model/Seri</td><td><input name="model"></td></tr>
-<tr><td>Cihaz Arızası</td><td><input name="fault"></td></tr>
-</table>
+    </div>
+  </div>
 
-</div>
+  <!-- ===== CONTENT ===== -->
+  <div class="content">
 
-<div class="service-status">
-<strong>SERVİS DURUMU :</strong>
-<select id="serviceStatusSelect">
-<option>Yerinde Bakım Yapıldı</option>
-<option>Atölyeye Alındı</option>
-<option>Servis Sonlandırıldı</option>
-<option>Parça Siparişi Geçildi</option>
-</select>
-</div>
+    <h2 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h2>
+    <h3 class="center subtitle">- TEKNİK SERVİS FORMU -</h3>
 
-<textarea id="serviceDesc" class="auto-grow service-desc"></textarea>
-<div class="desc-print"></div>
+    <div class="top-info">
+      <div class="info-box">Servis No : <span id="serviceNo"></span></div>
+      <div class="info-box">Servis Yetki No : <span id="serviceAuthNo"></span></div>
+    </div>
 
-<h4 class="section-title">Serviste Yapılan İşlemler</h4>
-<table>
-<thead>
-<tr>
-<th>TARİH</th>
-<th>İŞLEM ADI</th>
-<th>AÇIKLAMA</th>
-<th>FİYAT</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><input type="date"></td>
-<td><input></td>
-<td><textarea class="auto-grow"></textarea></td>
-<td><input></td>
-</tr>
-</tbody>
-</table>
+    <!-- TWO COL -->
+    <div class="two-col">
 
-<h4 class="section-title">Para Hareketleri</h4>
-<table>
-<thead>
-<tr>
-<th>TARİH</th>
-<th>TAHSİL EDEN</th>
-<th>ÖDEME ŞEKLİ</th>
-<th>DURUM</th>
-<th>TUTAR</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><input type="date"></td>
-<td><input></td>
-<td><input></td>
-<td><input></td>
-<td><input></td>
-</tr>
-</tbody>
-</table>
+      <table>
+        <thead><tr><th colspan="2">MÜŞTERİ BİLGİLERİ</th></tr></thead>
+        <tr><td>Ad</td><td><input name="customerName"></td></tr>
+        <tr><td>Telefon</td><td><input name="customerPhone"></td></tr>
+        <tr><td>Adres</td><td><textarea class="auto-grow" name="customerAddress"></textarea></td></tr>
+        <tr><td>Operatör Notu</td><td><input name="operatorNote"></td></tr>
+      </table>
 
-<!-- Onay -->
-<div class="approval">
-<label>
-<input type="checkbox">
-Yapılan işlemleri kontrol ettim ve cihazı teslim aldım.
-</label>
-</div>
+      <table>
+        <thead><tr><th colspan="2">CİHAZ BİLGİSİ</th></tr></thead>
+        <tr><td>Cihaz Markası</td><td><input name="brand"></td></tr>
+        <tr><td>Cihaz Türü</td><td><input name="type"></td></tr>
+        <tr><td>Cihaz Model/Seri</td><td><input name="model"></td></tr>
+        <tr><td>Cihaz Arızası</td><td><input name="fault"></td></tr>
+      </table>
 
-<!-- İmzalar -->
-<div class="signatures">
-<div class="sign-box">
-<div class="sign-title">Müşteri İmza</div>
-<canvas id="customerSign" class="signature-box"></canvas>
-</div>
+    </div>
 
-<div class="sign-box">
-<div class="sign-title">Teknisyen İmza</div>
-<canvas id="techSign" class="signature-box"></canvas>
-<div class="tech-id">Personel Sicil No: 009838-FMS</div>
-</div>
-</div>
+    <!-- SERVİS DURUMU -->
+    <div class="service-status-box">
+      <strong>SERVİS DURUMU :</strong>
+      <select id="serviceStatusSelect">
+        <option>Yerinde Bakım Yapıldı</option>
+        <option>Atölyeye Alındı</option>
+        <option>Servis Sonlandırıldı</option>
+        <option>Parça Siparişi Geçildi</option>
+      </select>
+    </div>
 
-<!-- NOTLAR (İmzadan sonra) -->
-<table class="notes">
-<thead><tr><th>NOTLAR</th></tr></thead>
-<tr><td>• YAPILAN TÜM SERVİS VE ONARIM İŞLEMLERİ, TESLİM TARİHİNDEN İTİBAREN BİR (1) YIL SÜRE İLE GARANTİ KAPSAMINDADIR.</td></tr>
-<tr><td>• FİRMAMIZ, SERVİSE TESLİM EDİLEN VE BİR (1) YIL İÇERİSİNDE TESLİM ALINMAYAN CİHAZLARDAN HUKUKİ VE MADDİ SORUMLULUK KABUL ETMEMEKTEDİR.</td></tr>
-<tr><td>• ÖN ÖDEME İLE İŞLEME ALINAN CİHAZLARDA, ONARIM İŞLEMİNDEN VAZGEÇİLMESİ HALİNDE TAHSİL EDİLEN BEDELİN İADESİ YAPILMAZ.</td></tr>
-<tr><td>• ATÖLYEYE ALINAN CİHAZLARDA, ONARIM SÜRECİNİN MÜŞTERİ TARAFINDAN İPTAL EDİLMESİ DURUMUNDA SERVİS ÜCRETİ VE NAKLİYE BEDELİ AYRICA TALEP EDİLİR.</td></tr>
-</table>
+    <textarea id="serviceDesc" class="auto-grow desc-area"
+      placeholder="Kombi kontrol edildi ve ateşleme düzeltildi..."></textarea>
 
-<!-- QR KOD -->
-<div class="qr-area">
-<a href="https://wa.me/908503052996" target="_blank">
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/908503052996" alt="WhatsApp QR">
-</a>
-<div class="qr-text">WhatsApp Destek Hattı</div>
-</div>
+    <!-- İŞLEMLER -->
+    <h4 class="section-title">Serviste Yapılan İşlemler</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>TARİH</th>
+          <th>İŞLEM ADI</th>
+          <th>AÇIKLAMA</th>
+          <th>FİYAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="date"></td>
+          <td><input></td>
+          <td><textarea class="auto-grow"></textarea></td>
+          <td><input></td>
+        </tr>
+      </tbody>
+    </table>
 
-<!-- Doküman No -->
-<div class="doc-no">
-Doküman No: <span id="docNo"></span>
-</div>
+    <!-- PARA -->
+    <h4 class="section-title">Para Hareketleri</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>TARİH</th>
+          <th>TAHSİL EDEN</th>
+          <th>ÖDEME ŞEKLİ</th>
+          <th>DURUM</th>
+          <th>TUTAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="date"></td>
+          <td><input></td>
+          <td><input></td>
+          <td><input></td>
+          <td><input></td>
+        </tr>
+      </tbody>
+    </table>
 
-</div>
+    <!-- İMZALAR -->
+    <div class="signatures">
+      <div class="sign-box">
+        <div class="sign-title">Müşteri İmza</div>
+        <canvas id="customerSign"></canvas>
+      </div>
+
+      <div class="sign-box">
+        <div class="sign-title">Teknisyen İmza</div>
+        <canvas id="techSign"></canvas>
+        <div class="tech-id">Personel Sicil No: 009838-FMS</div>
+      </div>
+    </div>
+
+    <!-- NOTLAR -->
+    <table class="notes">
+      <thead><tr><th>NOTLAR</th></tr></thead>
+      <tr><td>• Yapılan tüm servis ve onarım işlemleri 1 yıl garantilidir.</td></tr>
+      <tr><td>• 1 yıl içerisinde teslim alınmayan cihazlardan firma sorumlu değildir.</td></tr>
+      <tr><td>• Ön ödeme alınan işlemlerde iptal halinde ücret iadesi yapılmaz.</td></tr>
+    </table>
+
+    <!-- QR -->
+    <div class="qr-area">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/908503052996">
+      <div>WhatsApp Destek</div>
+    </div>
+
+    <div class="doc-no">
+      Doküman No: <span id="docNo"></span>
+    </div>
+
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
