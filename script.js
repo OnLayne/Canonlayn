@@ -1,45 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Servis No
+  // RANDOM NUMARALAR
   document.getElementById("serviceNo").textContent =
     Math.floor(100000 + Math.random()*900000);
 
-  // Yetki No
-  function generateAuthNo(){
-    return "FMS-" + Math.floor(10000 + Math.random()*90000);
-  }
-  document.getElementById("serviceAuthNo").textContent = generateAuthNo();
+  document.getElementById("serviceAuthNo").textContent =
+    "FMS-" + Math.floor(10000 + Math.random()*90000);
 
-  // Doküman No
   document.getElementById("docNo").textContent =
     "FMS-2026-" + Math.floor(1000 + Math.random()*9000);
 
-  // AutoGrow
-  function autoGrow(el){
-    el.style.height="auto";
-    el.style.height=el.scrollHeight+"px";
-  }
-
+  // AUTOGROW
   document.querySelectorAll(".auto-grow").forEach(el=>{
-    autoGrow(el);
-    el.addEventListener("input",()=>autoGrow(el));
+    el.addEventListener("input",()=>{
+      el.style.height="auto";
+      el.style.height=el.scrollHeight+"px";
+    });
   });
 
-  // Servis Durumu Vurgu
-  const statusSelect=document.getElementById("serviceStatusSelect");
-  function updateStatusHighlight(){
-    statusSelect.classList.add("status-selected");
-  }
-  statusSelect.addEventListener("change",updateStatusHighlight);
-  updateStatusHighlight();
-
-  // Print öncesi textarea düz metin
-  window.addEventListener("beforeprint",()=>{
-    const desc=document.getElementById("serviceDesc");
-    document.querySelector(".desc-print").textContent=desc.value;
+  // SERVİS DURUMU VURGU
+  const status = document.getElementById("serviceStatusSelect");
+  status.addEventListener("change",()=>{
+    status.classList.add("status-selected");
   });
 
-  // ===== İMZA SİSTEMİ (DÜZELTİLMİŞ) =====
+  // RETINA İMZA
   function setupSignature(id){
     const canvas = document.getElementById(id);
     const ctx = canvas.getContext("2d");
@@ -47,60 +32,56 @@ document.addEventListener("DOMContentLoaded", () => {
     function resize(){
       const ratio = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-
       canvas.width = rect.width * ratio;
       canvas.height = rect.height * ratio;
-
-      ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(ratio, ratio);
-
       ctx.lineWidth = 2;
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "#000";
     }
 
     resize();
     window.addEventListener("resize", resize);
 
-    let drawing = false;
+    let drawing=false;
 
     function getPos(e){
-      const rect = canvas.getBoundingClientRect();
-      const touch = e.touches ? e.touches[0] : e;
-
-      return {
-        x: touch.clientX - rect.left,
-        y: touch.clientY - rect.top
-      };
+      const rect=canvas.getBoundingClientRect();
+      const touch=e.touches?e.touches[0]:e;
+      return {x:touch.clientX-rect.left,y:touch.clientY-rect.top};
     }
 
-    function start(e){
-      drawing = true;
-      const pos = getPos(e);
+    canvas.addEventListener("mousedown",e=>{
+      drawing=true;
+      const p=getPos(e);
       ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-    }
+      ctx.moveTo(p.x,p.y);
+    });
 
-    function move(e){
-      if(!drawing) return;
-      e.preventDefault();
-      const pos = getPos(e);
-      ctx.lineTo(pos.x, pos.y);
+    canvas.addEventListener("mousemove",e=>{
+      if(!drawing)return;
+      const p=getPos(e);
+      ctx.lineTo(p.x,p.y);
       ctx.stroke();
-    }
+    });
 
-    function end(){
-      drawing = false;
-    }
+    canvas.addEventListener("mouseup",()=>drawing=false);
+    canvas.addEventListener("mouseleave",()=>drawing=false);
 
-    canvas.addEventListener("mousedown", start);
-    canvas.addEventListener("mousemove", move);
-    canvas.addEventListener("mouseup", end);
-    canvas.addEventListener("mouseleave", end);
+    canvas.addEventListener("touchstart",e=>{
+      drawing=true;
+      const p=getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x,p.y);
+    },{passive:false});
 
-    canvas.addEventListener("touchstart", start, { passive:false });
-    canvas.addEventListener("touchmove", move, { passive:false });
-    canvas.addEventListener("touchend", end);
+    canvas.addEventListener("touchmove",e=>{
+      e.preventDefault();
+      if(!drawing)return;
+      const p=getPos(e);
+      ctx.lineTo(p.x,p.y);
+      ctx.stroke();
+    },{passive:false});
+
+    canvas.addEventListener("touchend",()=>drawing=false);
   }
 
   setupSignature("customerSign");
@@ -109,50 +90,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ===== PRINT =====
-function printForm(){
-  window.print();
-}
-
-
-// ===== PDF İNDİRME (MOBİL UYUMLU) =====
+// YÜKSEK ÇÖZÜNÜRLÜK PDF
 async function downloadPDF(){
 
   const { jsPDF } = window.jspdf;
+  const element = document.getElementById("formArea");
+
+  const canvas = await html2canvas(element,{
+    scale:3,
+    useCORS:true
+  });
+
+  const imgData = canvas.toDataURL("image/jpeg",1.0);
   const pdf = new jsPDF("p","mm","a4");
 
-  let y = 20;
+  const width = 210;
+  const height = canvas.height * width / canvas.width;
 
-  function line(text){
-    pdf.text(text, 15, y);
-    y += 8;
-  }
-
-  pdf.setFont("helvetica","bold");
-  pdf.setFontSize(16);
-  pdf.text("TEKNİK SERVİS FORMU", 105, 15, { align: "center" });
-
-  pdf.setFontSize(11);
-  pdf.setFont("helvetica","normal");
-
-  line("MÜŞTERİ BİLGİLERİ");
-  line("Ad: " + document.querySelector("[name=customerName]").value);
-  line("Telefon: " + document.querySelector("[name=customerPhone]").value);
-  line("Adres: " + document.querySelector("[name=customerAddress]").value);
-  line("Operatör Notu: " + document.querySelector("[name=operatorNote]").value);
-
-  y += 5;
-
-  line("CİHAZ BİLGİSİ");
-  line("Marka: " + document.querySelector("[name=brand]").value);
-  line("Tür: " + document.querySelector("[name=type]").value);
-  line("Model: " + document.querySelector("[name=model]").value);
-  line("Arıza: " + document.querySelector("[name=fault]").value);
-
-  y += 5;
-
-  line("Servis Durumu: " + document.getElementById("serviceStatusSelect").value);
-  line("Servis Açıklama: " + document.getElementById("serviceDesc").value);
-
-  pdf.save("Servis-Formu.pdf");
+  pdf.addImage(imgData,"JPEG",0,0,width,height);
+  pdf.save("Teknik-Servis-Formu.pdf");
 }
