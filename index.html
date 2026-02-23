@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teknik Servis Formu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="a4-page">
+
+<div class="top-banner">
+  <div class="banner-inner">
+    <div class="banner-left">
+      <h1>İKLİM</h1>
+      <span>ISITMA & SOĞUTMA SİSTEMLERİ</span>
+      <div class="sub">BÖLGE MERKEZ SERVİSİ</div>
+    </div>
+    <div class="banner-right">
+      <div>0850 305 2996</div>
+      <div>GEZİCİ BÖLGE MERKEZ</div>
+      <div>DAYANIKLI TÜKETİM MALLARI</div>
+      <div>TEKNİK FORM</div>
+    </div>
+  </div>
+</div>
+
+<div class="pdf-btn-area">
+  <button onclick="window.print()">PDF İndir</button>
+</div>
+  
+<div class="content">
+
+<h2 class="center">BÖLGE MERKEZ TEKNİK SERVİS</h2>
+<h3 class="center subtitle">- TEKNİK SERVİS FORMU -</h3>
+
+<div class="top-info">
+<div class="service-highlight">Servis No : <span id="serviceNo"></span></div>
+<div class="service-highlight">Servis Yetki No : <span id="serviceAuthNo"></span></div>
+</div>
+
+<div class="two-col">
+
+<table>
+<thead><tr><th colspan="2">MÜŞTERİ BİLGİLERİ</th></tr></thead>
+<tr><td>Ad</td><td><input name="customerName"></td></tr>
+<tr><td>Telefon</td><td><input name="customerPhone"></td></tr>
+<tr><td>Adres</td><td><textarea name="customerAddress"></textarea></td></tr>
+<tr><td>Operatör Notu</td><td><input name="operatorNote"></td></tr>
+</table>
+
+<table>
+<thead><tr><th colspan="2">CİHAZ BİLGİSİ</th></tr></thead>
+<tr><td>Cihaz Markası</td><td><input name="brand"></td></tr>
+<tr><td>Cihaz Türü</td><td><input name="type"></td></tr>
+<tr><td>Cihaz Model/Seri</td><td><input name="model"></td></tr>
+<tr><td>Cihaz Arızası</td><td><input name="fault"></td></tr>
+</table>
+
+</div>
+
+<div class="service-status">
+<strong>SERVİS DURUMU :</strong>
+<select id="serviceStatusSelect">
+<option>Yerinde Bakım Yapıldı</option>
+<option>Atölyeye Alındı</option>
+<option>Servis Sonlandırıldı</option>
+<option>Parça Siparişi Geçildi</option>
+</select>
+</div>
+
+<textarea id="serviceDesc" class="auto-grow service-desc"></textarea>
+<div class="desc-print"></div>
+
+<h4 class="section-title">Serviste Yapılan İşlemler</h4>
+<table>
+<thead>
+<tr>
+<th>TARİH</th>
+<th>İŞLEM ADI</th>
+<th>AÇIKLAMA</th>
+<th>FİYAT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="date"></td>
+<td><input></td>
+<td><textarea class="auto-grow"></textarea></td>
+<td><input></td>
+</tr>
+</tbody>
+</table>
+
+<h4 class="section-title">Para Hareketleri</h4>
+<table>
+<thead>
+<tr>
+<th>TARİH</th>
+<th>TAHSİL EDEN</th>
+<th>ÖDEME ŞEKLİ</th>
+<th>DURUM</th>
+<th>TUTAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="date"></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+</tr>
+</tbody>
+</table>
+
+<div class="approval">
+<label>
+<input type="checkbox">
+Yapılan işlemleri, değiştirilen parçaları, ücret bilgisini ve garanti şartlarını kontrol ettim; servis hizmetini eksiksiz teslim aldığımı kabul ediyorum.
+</label>
+</div>
+
+<div class="signatures">
+<div class="sign-box">
+<div class="sign-title">Müşteri İmza</div>
+<canvas id="customerSign" class="signature-box"></canvas>
+</div>
+
+<div class="sign-box">
+<div class="sign-title">Teknisyen İmza</div>
+<canvas id="techSign" class="signature-box"></canvas>
+<div class="tech-id">Personel Sicil No: 009838-FMS</div>
+</div>
+</div>
+
+<table class="notes">
+<thead><tr><th>RESMİ BİLGİLENDİRME / SERVİS SORUMLULUKLARI VE HİZMET ŞARTLARI</th></tr></thead>
+<tr><td>
+1. İşbu servis formu kapsamında yapılan bakım ve onarım işlemleri için teslim tarihinden itibaren 1 (bir) yıl süre ile işçilik garantisi verilmektedir. Garanti yalnızca yapılan işlem ve değiştirilen parça ile sınırlıdır.<br><br>
+2. Kullanıcı hatası, darbe, sıvı teması, elektrik dalgalanması, yüksek voltaj, yetkisiz müdahale veya benzeri dış etkenlerden kaynaklanan arızalar garanti kapsamı dışındadır.<br><br>
+3. Onarım görmüş cihazlara üçüncü kişiler tarafından müdahale edilmesi halinde verilen işçilik garantisi sona erer.<br><br>
+4. Onarım sonrası aynı arızanın tekrar etmesi halinde, arızanın firmamızdan kaynaklanmadığının teknik inceleme ile tespiti durumunda yeniden servis ücreti talep edilebilir.<br><br>
+5. Arıza tespiti yapıldıktan ve müşteri onayı alındıktan sonra başlatılan işlemlerde, onarımın müşteri tarafından iptal edilmesi halinde yapılan arıza tespit, parça temin ve lojistik masrafları tahsil edilir.<br><br>
+6. Ön ödeme veya kapora alınarak başlatılan işlemlerde, yapılan masraflar mahsup edilir; kalan tutar varsa iade edilir.<br><br>
+7. Servise teslim edilen cihazların teslim tarihinden itibaren 1 (bir) yıl içerisinde teslim alınmaması halinde depolama sorumluluğu bu süre ile sınırlıdır.<br><br>
+8. Fatura, hizmetin verildiği kişi veya kurum adına düzenlenir.<br><br>
+9. Garanti ve servis hizmetlerine ilişkin taleplerde bu servis formunun ibraz edilmesi gerekmektedir.<br><br>
+10. Cihazın teslimi sırasında mevcut hasar, eksik parça ve arıza durumu kayıt altına alınmıştır. Müşteri, servis formunda belirtilen arıza tespiti ve işlem kapsamını kabul ettiğini beyan eder. Yapılan işlem dışında kalan ve sonradan ortaya çıkan arızalarda, teknik inceleme sonucu işlemle illiyet bağı kurulamadığı takdirde firmamız sorumlu tutulamaz.<br><br>
+11. Servis kapsamında yalnızca müşteri tarafından onaylanan arıza ve işlemler gerçekleştirilir. Onaylanmayan işlemler uygulanmaz. Yapılan işlem dışında kalan parça ve sistemlerde oluşabilecek arızalarda, işlemle doğrudan teknik bağlantı kurulamadığı sürece firmamız sorumlu değildir.<br><br>
+12. Cihazın teknik incelemesi sonucunda arızanın kullanıcı kaynaklı olduğunun veya dış etkenlerden meydana geldiğinin tespiti halinde, garanti hükümleri uygulanmaz ve servis ücreti talep edilebilir.<br><br>
+13. Müşteri; arıza tespiti, işlem kapsamı, ücret bilgisi ve garanti şartları hakkında bilgilendirildiğini, işbu servis formunu okuyarak anladığını ve kabul ettiğini beyan eder.
+</td></tr>
+</table>
+
+<div class="qr-area">
+<a href="https://wa.me/908503052996" target="_blank">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/908503052996" alt="WhatsApp QR">
+</a>
+<div class="qr-text">WhatsApp Destek Hattı</div>
+</div>
+
+<div class="doc-no">
+Doküman No: <span id="docNo"></span>
+</div>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
