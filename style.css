@@ -146,10 +146,11 @@ font-size:12px;
 
 /* ✅ İMZA ALANI TAM KULLANIM */
 .signature-box{
-height:120px;
+height:160px;        /* Alan büyüdü */
 width:100%;
 display:block;
 touch-action:none;
+background:#fff;
 }
 
 .tech-id{
@@ -265,4 +266,5 @@ background:#ffffff !important;
 
 .pdf-mode body{
 background:#ffffff !important;
+
 }
